@@ -1,0 +1,19 @@
+{
+  "_version": 1,
+  "name": "What is you name?",
+  "messages.hello": "Hello, %{name}",
+  "bravo": "Bravo!",
+  "do": "Do something",
+  "take.key": "Take key",
+  "cannot.take": "Cannot take %{object}",
+  "message.end": "This is the end for %{name}",
+  "verb.look": "look",
+  "verb.take": "take",
+  "verb.open": "open",
+  "verb.use": "use",
+  "verb.push": "push",
+  "verb.go": "go",
+  "verb.talk": "talk",
+  "verb.jump": "jump",
+  "object.key": "key"
+}

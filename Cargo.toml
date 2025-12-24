@@ -1,0 +1,10 @@
+[package]
+name = "dungeon-of-suffering"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rust-i18n = "3"
+strum = { version = "0.27.2", features=["derive"] }
+strum_macros = "0.27.2"
+unicode-normalization = "0.1.25"
