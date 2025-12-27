@@ -6,6 +6,7 @@ pub enum ItemKind {
     Map,
     Purse,
     Gold,
+    Bread
 }
 
 impl ItemKind {
@@ -17,6 +18,7 @@ impl ItemKind {
             ItemKind::Map => "map",
             ItemKind::Purse => "pure",
             ItemKind::Gold => "gold",
+            ItemKind::Bread => "bread"
         }
     }
 }
@@ -68,12 +70,8 @@ impl Equipment {
     }
 
     pub fn init_equipment() -> Equipment {
-        let sword = Item::new_default(ItemKind::Sword);
-        let amulet = Item::new_default(ItemKind::Amulet);
-        let map = Item::new_default(ItemKind::Map);
-        let purse = Item::new_default(ItemKind::Purse);
-        let gold = Item::new_default(ItemKind::Gold);
+        let bread = Item::new_default(ItemKind::Bread);
 
-        Equipment::new(vec![sword, map, amulet, purse, gold])
+        Equipment::new(vec![bread])
     }
 }

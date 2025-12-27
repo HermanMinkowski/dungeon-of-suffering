@@ -1,4 +1,5 @@
 mod part1;
+mod village;
 
 use crate::doors::Doors;
 use crate::equipment::Equipment;
@@ -22,10 +23,7 @@ pub struct Game {
 impl Default for Game {
     fn default() -> Self {
         Game {
-            player: Player {
-                name: "".to_owned(),
-                equipments: Equipment::init_equipment(),
-            },
+            player: Player::default(),
             last_command: "".to_owned(),
             locked_doors: Doors::all_doors(),
             status: Status::new(),
@@ -42,6 +40,25 @@ impl Game {
     }
 
     pub fn start(&mut self) -> State<Game> {
+
+        self.list_equipments();
+        println!("{}", t!("title"));
+
+        State::with_input(Self::intro)
+    }
+
+    pub fn enter_name(&mut self) -> State<Game> {
+        std::mem::swap(&mut self.player.name, &mut self.last_command);
+        println!("{}", t!("messages.hello", name = self.player.name));
+        State::no_input(Self::do_something)
+    }
+
+    pub fn end(&mut self) -> State<Game> {
+        println!("{}", t!("message.end", name = self.player.name));
+        State::completed(Self::end)
+    }
+
+    pub fn list_equipments(&self) {
         let equipment = Equipment::init_equipment();
 
         equipment.items.into_iter().for_each(|item| {
@@ -55,20 +72,6 @@ impl Game {
                 item.name
             );
         });
-
-        println!("{}", t!("name"));
-        State::with_input(Self::enter_name)
-    }
-
-    pub fn enter_name(&mut self) -> State<Game> {
-        std::mem::swap(&mut self.player.name, &mut self.last_command);
-        println!("{}", t!("messages.hello", name = self.player.name));
-        State::no_input(Self::do_something)
-    }
-
-    pub fn end(&mut self) -> State<Game> {
-        println!("{}", t!("message.end", name = self.player.name));
-        State::completed(Self::end)
     }
 
     pub fn parse_command(&mut self) -> Vec<String> {

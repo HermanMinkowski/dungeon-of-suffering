@@ -3,7 +3,7 @@
   "name": "What is you name?",
   "messages.hello": "Hello, %{name}",
   "bravo": "Bravo!",
-  "do": "Do something",
+  "do": "Do something!",
   "take.key": "Take key",
   "cannot.take": "Cannot take %{object}",
   "message.end": "This is the end for %{name}",
@@ -15,5 +15,6 @@
   "verb.go": "go",
   "verb.talk": "talk",
   "verb.jump": "jump",
+  "help": "help",
   "object.key": "key"
 }
