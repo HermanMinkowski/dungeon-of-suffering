@@ -2,8 +2,6 @@ use crate::state::State;
 use crate::Game;
 
 pub fn game_loop() {
-    rust_i18n::set_locale("fr");
-
     use std::io::Write;
     let mut game = Game::default();
     let mut state_function = State::no_input(Game::start);

@@ -18,14 +18,13 @@ impl Game {
         }
 
         let verb = parts.get(0).map(|s| s.as_str()).unwrap_or("");
-        let help = t!("help");
 
         match verb {
             "" => {
                 println!("{}", t!("do"));
                 State::no_input(Self::help)
             }
-            _ if verb == help => {
+            _ if verb == self.commands().help => {
                 println!("{}", t!("help.text"));
                 State::with_input(Self::do_something)
             }
@@ -40,16 +39,14 @@ impl Game {
             return State::with_input(Self::do_something);
         }
 
-        //TODO put verbs and object in a struct reset at language change
-
         let verb = parts.get(0).map(|s| s.as_str()).unwrap_or("");
         let object = parts.get(1).map(|s| s.as_str()).unwrap_or("");
-        let look = t!("verb.look");
+        /*let look = t!("verb.look");
         let eat = t!("verb.eat");
         let take = t!("verb.take");
         let talk = t!("verb.talk");
         let go = t!("verb.go");
-        let bread = t!("object.bread");
+        let bread = t!("object.bread");*/
 
         //TODO complete logic
 
@@ -58,7 +55,7 @@ impl Game {
                 println!("{}", t!("do"));
                 State::with_input(Self::do_something)
             }
-            "exit" => {
+            _ if verb == self.commands().quit => {
                 if self.player.equipments.has("key") {
                     println!("{}", t!("bravo"));
                     State::no_input(Self::end)
@@ -66,8 +63,8 @@ impl Game {
                     State::with_input(Self::do_something)
                 }
             }
-            _ if verb == eat => match object {
-                _ if object == bread => {
+            _ if verb == self.verbs().eat => match object {
+                _ if object == self.objects().bread => {
                     println!("{}", t!("take.key"));
                     self.player.equipments.add(Item::new_default(ItemKind::Key));
                     State::with_input(Self::do_something)

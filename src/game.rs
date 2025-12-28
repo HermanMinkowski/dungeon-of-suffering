@@ -9,6 +9,10 @@ use crate::status::Status;
 use rust_i18n::{i18n, t};
 use unicode_normalization::char::is_combining_mark;
 use unicode_normalization::UnicodeNormalization;
+use crate::vocabulary::commands::Commands;
+use crate::vocabulary::objects::Objects;
+use crate::vocabulary::verbs::Verbs;
+use crate::vocabulary::Vocabulary;
 
 i18n!("locales", fallback = "en");
 
@@ -18,6 +22,7 @@ pub struct Game {
     pub last_command: String,
     pub locked_doors: Vec<Doors>,
     pub status: Status,
+    pub vocabulary: Vocabulary,
 }
 
 impl Default for Game {
@@ -27,6 +32,7 @@ impl Default for Game {
             last_command: "".to_owned(),
             locked_doors: Doors::all_doors(),
             status: Status::new(),
+            vocabulary: Vocabulary::new(),
         }
     }
 }
@@ -40,7 +46,8 @@ impl Game {
     }
 
     pub fn start(&mut self) -> State<Game> {
-
+        rust_i18n::set_locale("fr");
+        self.vocabulary.refresh();
         self.list_equipments();
         println!("{}", t!("title"));
 
@@ -84,5 +91,17 @@ impl Game {
             .split_whitespace()
             .map(|s| s.to_string())
             .collect()
+    }
+
+    pub fn verbs(&self) -> &Verbs {
+        &self.vocabulary.verbs
+    }
+
+    pub fn objects(&self) -> &Objects {
+        &self.vocabulary.objects
+    }
+
+    pub fn commands(&self) -> &Commands {
+        &self.vocabulary.commands
     }
 }
