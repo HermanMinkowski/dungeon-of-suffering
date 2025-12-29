@@ -6,11 +6,25 @@ pub struct Verbs {
     pub take: String,
     pub open: String,
     pub use_verb: String,
-    pub push:  String,
+    pub push: String,
     pub go: String,
     pub talk: String,
     pub jump: String,
     pub eat: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Verb {
+    Look,
+    Take,
+    Open,
+    Use,
+    Push,
+    Go,
+    Talk,
+    Jump,
+    Eat,
+    Unknown,
 }
 
 impl Verbs {
@@ -38,5 +52,29 @@ impl Verbs {
         self.talk = t!("verb.talk").to_string();
         self.jump = t!("verb.jump").to_string();
         self.eat = t!("verb.eat").to_string();
+    }
+
+    pub fn parse(&self, input: &str) -> Verb {
+        if input == self.look {
+            Verb::Look
+        } else if input == self.take {
+            Verb::Take
+        } else if input == self.open {
+            Verb::Open
+        } else if input == self.use_verb {
+            Verb::Use
+        } else if input == self.push {
+            Verb::Push
+        } else if input == self.go {
+            Verb::Go
+        } else if input == self.talk {
+            Verb::Talk
+        } else if input == self.jump {
+            Verb::Jump
+        } else if input == self.eat {
+            Verb::Eat
+        } else {
+            Verb::Unknown
+        }
     }
 }

@@ -6,13 +6,14 @@ use crate::equipment::Equipment;
 use crate::player::Player;
 use crate::state::State;
 use crate::status::Status;
-use rust_i18n::{i18n, t};
-use unicode_normalization::char::is_combining_mark;
-use unicode_normalization::UnicodeNormalization;
+use crate::vocabulary::commands::Command;
 use crate::vocabulary::commands::Commands;
 use crate::vocabulary::objects::Objects;
 use crate::vocabulary::verbs::Verbs;
 use crate::vocabulary::Vocabulary;
+use rust_i18n::{i18n, t};
+use unicode_normalization::char::is_combining_mark;
+use unicode_normalization::UnicodeNormalization;
 
 i18n!("locales", fallback = "en");
 
@@ -103,5 +104,19 @@ impl Game {
 
     pub fn commands(&self) -> &Commands {
         &self.vocabulary.commands
+    }
+
+    pub fn handle_global_commands(&mut self, command: Command) -> bool {
+        match command {
+            Command::Help => {
+                println!("{}", t!("help.text"));
+                true
+            }
+            Command::Quit => {
+                println!("{}", t!("help.text"));
+                true
+            }
+            _ => false,
+        }
     }
 }

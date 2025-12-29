@@ -1,7 +1,10 @@
+use crate::equipment::{Item, ItemKind};
 use crate::state::State;
+use crate::vocabulary::commands::Command;
+use crate::vocabulary::objects::Object;
+use crate::vocabulary::verbs::Verb;
 use crate::Game;
 use rust_i18n::t;
-use crate::equipment::{Item, ItemKind};
 
 impl Game {
     pub fn intro(&mut self) -> State<Game> {
@@ -17,16 +20,15 @@ impl Game {
             return State::with_input(Self::help);
         }
 
-        let verb = parts.get(0).map(|s| s.as_str()).unwrap_or("");
+        let verb_part = parts.get(0).map(|s| s.as_str()).unwrap_or("");
 
-        match verb {
-            "" => {
-                println!("{}", t!("do"));
-                State::no_input(Self::help)
-            }
-            _ if verb == self.commands().help => {
+        let command = self.vocabulary.commands.parse(verb_part);
+        println!("{}", verb_part);
+
+        match command {
+            Command::Help => {
                 println!("{}", t!("help.text"));
-                State::with_input(Self::do_something)
+                State::with_input(Self::auberge)
             }
             _ => State::no_input(Self::help),
         }
@@ -36,41 +38,35 @@ impl Game {
         let parts = self.parse_command();
 
         if parts.len() < 1 || parts.len() > 2 {
-            return State::with_input(Self::do_something);
+            return State::with_input(Self::auberge);
         }
 
-        let verb = parts.get(0).map(|s| s.as_str()).unwrap_or("");
-        let object = parts.get(1).map(|s| s.as_str()).unwrap_or("");
-        /*let look = t!("verb.look");
-        let eat = t!("verb.eat");
-        let take = t!("verb.take");
-        let talk = t!("verb.talk");
-        let go = t!("verb.go");
-        let bread = t!("object.bread");*/
+        let verb_part = parts.get(0).map(|s| s.as_str()).unwrap_or("");
+        let verb = self.vocabulary.verbs.parse(verb_part);
+        let command = self.vocabulary.commands.parse(verb_part);
+
+        let object_part = parts.get(1).map(|s| s.as_str()).unwrap_or("");
+        let object = self.vocabulary.objects.parse(object_part);
+
+        if self.handle_global_commands(command) {
+            return State::with_input(Self::auberge);
+        }
 
         //TODO complete logic
 
         match verb {
-            "" => {
-                println!("{}", t!("do"));
-                State::with_input(Self::do_something)
+            Verb::Look => {
+                println!("{}", t!("bravo"));
+                State::no_input(Self::end)
             }
-            _ if verb == self.commands().quit => {
-                if self.player.equipments.has("key") {
-                    println!("{}", t!("bravo"));
-                    State::no_input(Self::end)
-                } else {
-                    State::with_input(Self::do_something)
-                }
-            }
-            _ if verb == self.verbs().eat => match object {
-                _ if object == self.objects().bread => {
+            Verb::Eat => match object {
+                Object::Bread => {
                     println!("{}", t!("take.key"));
                     self.player.equipments.add(Item::new_default(ItemKind::Key));
                     State::with_input(Self::do_something)
                 }
                 _ => {
-                    println!("{}", t!("cannot.take", object = object));
+                    println!("{}", t!("cannot.take", object = object_part));
                     State::with_input(Self::do_something)
                 }
             },
