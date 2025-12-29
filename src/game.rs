@@ -49,7 +49,6 @@ impl Game {
     pub fn start(&mut self) -> State<Game> {
         rust_i18n::set_locale("fr");
         self.vocabulary.refresh();
-        self.list_equipments();
         println!("{}", t!("title"));
 
         State::with_input(Self::intro)
@@ -69,16 +68,16 @@ impl Game {
     pub fn list_equipments(&self) {
         let equipment = Equipment::init_equipment();
 
+        println!("{}", t!("bag.content"));
+
         equipment.items.into_iter().for_each(|item| {
-            println!(
-                "The player {} a {}.",
-                if item.amount > 0 {
-                    "has"
-                } else {
-                    "does not have"
-                },
-                item.name
-            );
+            print!("* ");
+
+            if item.amount > 1 {
+                print!("{}", item.amount);
+            }
+
+            println!("{}", item.name);
         });
     }
 
@@ -110,6 +109,10 @@ impl Game {
         match command {
             Command::Help => {
                 println!("{}", t!("help.text"));
+                true
+            }
+            Command::Equipment => {
+                self.list_equipments();
                 true
             }
             Command::Quit => {

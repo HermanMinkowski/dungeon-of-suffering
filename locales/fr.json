@@ -5,6 +5,8 @@
   "bravo": "Bravo!",
   "do": "Fait quelque chose!",
   "take.key": "Prendre clé",
+
+  "bag.content": "Votre sac contient: ",
   "cannot.take": "Impossible de prendre %{object}",
   "message.end": "C'est la fin pour %{name}",
   "verb.look": "regarder",
@@ -17,6 +19,7 @@
   "verb.jump": "sauter",
   "verb.eat": "manger",
   "command.help": "aide",
+  "command.equipment": "equipment",
   "command.quit": "quitter",
   "object.key": "cle",
   "object.bread": "pain",

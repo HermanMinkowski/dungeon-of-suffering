@@ -8,7 +8,7 @@ pub struct Status {
 impl Status {
     pub fn new() -> Self {
         Status {
-            hungry: false,
+            hungry: true,
             hurt: false,
             talked_to_mage: false,
         }
