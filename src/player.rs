@@ -10,7 +10,6 @@ impl Default for Player {
         Self {
             name: "".to_owned(),
             equipments: Equipment::init_equipment(),
-
         }
     }
 }

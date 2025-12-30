@@ -23,7 +23,7 @@ impl ItemKind {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub struct Item {
     pub kind: ItemKind,
     pub name: &'static str,
@@ -45,6 +45,7 @@ impl Item {
         Item::new(kind, 0, u32::MAX)
     }
 }
+
 #[derive(Debug)]
 pub struct Equipment {
     pub items: Vec<Item>,
@@ -67,6 +68,12 @@ impl Equipment {
         }
 
         false
+    }
+
+    pub fn remove(&mut self, item_kind: ItemKind) {
+        if let Some(position) = self.items.iter().position(|item| item.kind.translation_key() == item_kind.translation_key()) {
+            self.items.remove(position);
+        }
     }
 
     pub fn init_equipment() -> Equipment {

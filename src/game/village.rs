@@ -1,4 +1,4 @@
-use crate::equipment::{Item, ItemKind};
+use crate::equipment::ItemKind;
 use crate::state::State;
 use crate::vocabulary::commands::Command;
 use crate::vocabulary::objects::Object;
@@ -28,17 +28,17 @@ impl Game {
         match command {
             Command::Help => {
                 println!("{}", t!("help.text"));
-                State::with_input(Self::auberge)
+                State::with_input(Self::inn)
             }
             _ => State::no_input(Self::help),
         }
     }
 
-    pub fn auberge(&mut self) -> State<Game> {
+    pub fn inn(&mut self) -> State<Game> {
         let parts = self.parse_command();
 
         if parts.len() < 1 || parts.len() > 2 {
-            return State::with_input(Self::auberge);
+            return State::with_input(Self::inn);
         }
 
         let verb_part = parts.get(0).map(|s| s.as_str()).unwrap_or("");
@@ -49,28 +49,41 @@ impl Game {
         let object = self.vocabulary.objects.parse(object_part);
 
         if self.handle_global_commands(command) {
-            return State::with_input(Self::auberge);
+            return State::with_input(Self::inn);
         }
 
         //TODO complete logic
 
         match verb {
-            Verb::Look => {
-                println!("{}", t!("bravo"));
-                State::no_input(Self::end)
-            }
+            Verb::Look =>  {
+                    if object_part == "" {
+                        println!("{}", "inn.look")
+                    } else {
+                        println!("{}", "look.nothing")
+                    }
+                    State::with_input(Self::inn)
+                },
             Verb::Eat => match object {
                 Object::Bread => {
-                    println!("{}", t!("take.key"));
-                    self.player.equipments.add(Item::new_default(ItemKind::Key));
-                    State::with_input(Self::do_something)
+                    if self.player.equipments.has(ItemKind::Bread.translation_key()) {
+                        println!("{}", t!("inn.eat.bread"));
+                        self.player.equipments.remove(ItemKind::Bread);
+                        self.status.hungry = false;
+                    } else {
+                        println!("{}", t!("cannot.eat", object = object_part));
+                    }
+                    State::with_input(Self::inn)
                 }
                 _ => {
-                    println!("{}", t!("cannot.take", object = object_part));
-                    State::with_input(Self::do_something)
+                    println!("{}", t!("cannot.eat", object = object_part));
+                    State::with_input(Self::inn)
                 }
             },
-            _ => State::with_input(Self::do_something),
+            Verb::Take => match object {
+                Object::Notice => State::with_input(Self::inn),
+                _ => State::with_input(Self::inn),
+            },
+            _ => State::with_input(Self::inn),
         }
     }
 }

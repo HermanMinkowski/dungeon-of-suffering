@@ -66,11 +66,9 @@ impl Game {
     }
 
     pub fn list_equipments(&self) {
-        let equipment = Equipment::init_equipment();
-
         println!("{}", t!("bag.content"));
 
-        equipment.items.into_iter().for_each(|item| {
+        self.player.equipments.items.clone().into_iter().for_each(|item| {
             print!("* ");
 
             if item.amount > 1 {
