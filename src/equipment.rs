@@ -1,24 +1,28 @@
+use rust_i18n::t;
+
 #[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub enum ItemKind {
+    Bread,
+    Notice,
     Sword,
     Key,
     Amulet,
     Map,
     Purse,
     Gold,
-    Bread
 }
 
 impl ItemKind {
     pub fn translation_key(&self) -> &'static str {
         match self {
-            ItemKind::Sword => "sword",
-            ItemKind::Key => "key",
-            ItemKind::Amulet => "amulet",
-            ItemKind::Map => "map",
-            ItemKind::Purse => "pure",
-            ItemKind::Gold => "gold",
-            ItemKind::Bread => "bread"
+            ItemKind::Sword => "object.sword",
+            ItemKind::Bread => "object.bread",
+            ItemKind::Notice => "object.notice",
+            ItemKind::Key => "object.key",
+            ItemKind::Amulet => "object.amulet",
+            ItemKind::Map => "object.map",
+            ItemKind::Purse => "object.pure",
+            ItemKind::Gold => "object.gold",
         }
     }
 }
@@ -60,18 +64,12 @@ impl Equipment {
         self.items.push(item);
     }
 
-    pub fn has(&self, name: &'static str) -> bool {
-        for item in &self.items {
-            if item.name == name {
-                return true;
-            }
-        }
-
-        false
+    pub fn has(&self, item_kind: ItemKind) -> bool {
+        self.items.iter().position(|item| item.kind == item_kind).is_some()
     }
 
     pub fn remove(&mut self, item_kind: ItemKind) {
-        if let Some(position) = self.items.iter().position(|item| item.kind.translation_key() == item_kind.translation_key()) {
+        if let Some(position) = self.items.iter().position(|item| item.kind == item_kind) {
             self.items.remove(position);
         }
     }
@@ -80,5 +78,19 @@ impl Equipment {
         let bread = Item::new_default(ItemKind::Bread);
 
         Equipment::new(vec![bread])
+    }
+
+    pub fn list(&self) {
+        println!("{}", t!("bag.content"));
+
+        self.items.clone().into_iter().for_each(|item| {
+            print!("* ");
+
+            if item.amount > 1 {
+                print!("{}", item.amount);
+            }
+
+            println!("{}", t!(item.kind.translation_key()));
+        });
     }
 }

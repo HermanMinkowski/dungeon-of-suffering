@@ -22,7 +22,7 @@ impl Game {
                 State::with_input(Self::do_something)
             }
             "exit" => {
-                if self.player.equipments.has("key") {
+                if self.player.equipments.has(ItemKind::Key) {
                     println!("{}", t!("bravo"));
                     State::no_input(Self::end)
                 } else {

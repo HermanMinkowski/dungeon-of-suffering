@@ -65,20 +65,6 @@ impl Game {
         State::completed(Self::end)
     }
 
-    pub fn list_equipments(&self) {
-        println!("{}", t!("bag.content"));
-
-        self.player.equipments.items.clone().into_iter().for_each(|item| {
-            print!("* ");
-
-            if item.amount > 1 {
-                print!("{}", item.amount);
-            }
-
-            println!("{}", item.name);
-        });
-    }
-
     pub fn parse_command(&mut self) -> Vec<String> {
         self.last_command
             .nfd()
@@ -110,7 +96,7 @@ impl Game {
                 true
             }
             Command::Equipment => {
-                self.list_equipments();
+                self.player.equipments.list();
                 true
             }
             Command::Quit => {

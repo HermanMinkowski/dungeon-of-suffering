@@ -1,4 +1,4 @@
-use crate::equipment::ItemKind;
+use crate::equipment::{Item, ItemKind};
 use crate::state::State;
 use crate::vocabulary::commands::Command;
 use crate::vocabulary::objects::Object;
@@ -57,15 +57,15 @@ impl Game {
         match verb {
             Verb::Look =>  {
                     if object_part == "" {
-                        println!("{}", "inn.look")
+                        println!("{}", t!("inn.look"));
                     } else {
-                        println!("{}", "look.nothing")
+                        println!("{}", t!("look.nothing"));
                     }
                     State::with_input(Self::inn)
                 },
             Verb::Eat => match object {
                 Object::Bread => {
-                    if self.player.equipments.has(ItemKind::Bread.translation_key()) {
+                    if self.player.equipments.has(ItemKind::Bread) {
                         println!("{}", t!("inn.eat.bread"));
                         self.player.equipments.remove(ItemKind::Bread);
                         self.status.hungry = false;
@@ -80,10 +80,69 @@ impl Game {
                 }
             },
             Verb::Take => match object {
-                Object::Notice => State::with_input(Self::inn),
-                _ => State::with_input(Self::inn),
+                Object::Notice => {
+                    if self.player.equipments.has(ItemKind::Notice) {
+                        println!("{}", t!("inn.take.notice.has"));
+                    } else {
+                        println!("{}", t!("inn.take.notice"));
+                        self.player.equipments.add(Item::new_default(ItemKind::Notice));
+                    }
+
+                    State::with_input(Self::inn)
+                },
+                _ => {
+                    if object_part == "" {
+                        println!("{}", t!("cannot.take.nothing"));
+                    } else {
+                        println!("{}", t!("cannot.take", object = object_part));
+                    }
+
+                    State::with_input(Self::inn)
+                },
             },
-            _ => State::with_input(Self::inn),
+            Verb::Talk => match object {
+                Object::Ginette => {
+                    println!("{}", t!("inn.talk.ginette"));
+                    State::with_input(Self::inn)
+                },
+                _ => {
+                    println!("{}", t!("cannot.talk"));
+                    State::with_input(Self::inn)
+                },
+            },
+            Verb::Go => match object {
+                Object::East => {
+                    if self.status.hungry {
+                        println!("{}", t!("inn.go.east.hungry"));
+                        return State::with_input(Self::inn)
+                    }
+
+                    if !self.player.equipments.has(ItemKind::Notice) {
+                        println!("{}", t!("inn.go.east.notice"));
+                        return State::with_input(Self::inn)
+                    }
+
+                    println!("{}", t!("inn.go.east"));
+                    State::with_input(Self::do_something)
+                },
+                Object::Inn => {
+                    println!("{}", t!("inn.go.inn"));
+                    State::with_input(Self::inn)
+                },
+                _ => {
+                    if object_part == "" {
+                        println!("{}", t!("cannot.go.nowhere"));
+                    } else {
+                        println!("{}", t!("cannot.go", object = object_part));
+                    }
+
+                    State::with_input(Self::inn)
+                },
+            },
+            _ => {
+                println!("{}", t!("cannot.do"));
+                State::with_input(Self::inn)
+            },
         }
     }
 }
