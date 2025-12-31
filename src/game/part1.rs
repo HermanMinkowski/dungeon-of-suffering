@@ -8,7 +8,7 @@ impl Game {
         let parts = self.parse_command();
 
         if parts.len() < 1 || parts.len() > 2 {
-            return State::with_input(Self::do_something);
+            return State::with_input(Self::do_something, None);
         }
 
         let verb = parts.get(0).map(|s| s.as_str()).unwrap_or("");
@@ -18,29 +18,29 @@ impl Game {
 
         match verb {
             "" => {
-                println!("{}", t!("do"));
-                State::with_input(Self::do_something)
+                let text_output = Some(t!("do").to_string());
+                State::with_input(Self::do_something, text_output)
             }
             "exit" => {
                 if self.player.equipments.has(ItemKind::Key) {
-                    println!("{}", t!("bravo"));
-                    State::no_input(Self::end)
+                    let text_output = Some(t!("bravo").to_string());
+                    State::no_input(Self::end, text_output)
                 } else {
-                    State::with_input(Self::do_something)
+                    State::with_input(Self::do_something, None)
                 }
             }
             _ if verb == take => match object {
                 _ if object == key => {
-                    println!("{}", t!("take.key"));
+                    let text_output = Some(t!("take.key").to_string());
                     self.player.equipments.add(Item::new_default(ItemKind::Key));
-                    State::with_input(Self::do_something)
+                    State::with_input(Self::do_something, text_output)
                 }
                 _ => {
-                    println!("{}", t!("cannot.take", object = object));
-                    State::with_input(Self::do_something)
+                    let text_output = Some(t!("cannot.take", object = object).to_string());
+                    State::with_input(Self::do_something, text_output)
                 }
             },
-            _ => State::with_input(Self::do_something),
+            _ => State::with_input(Self::do_something, None),
         }
     }
 }

@@ -49,15 +49,15 @@ impl Game {
     pub fn start(&mut self) -> State<Game> {
         rust_i18n::set_locale("fr");
         self.vocabulary.refresh();
-        println!("{}", t!("title"));
+        let text_output = Some(t!("title").to_string());
 
-        State::with_input(Self::intro)
+        State::with_input(Self::intro, text_output)
     }
 
     pub fn enter_name(&mut self) -> State<Game> {
         std::mem::swap(&mut self.player.name, &mut self.last_command);
-        println!("{}", t!("messages.hello", name = self.player.name));
-        State::no_input(Self::do_something)
+        let text_output = Some(t!("messages.hello", name = self.player.name).to_string());
+        State::no_input(Self::do_something, text_output)
     }
 
     pub fn end(&mut self) -> State<Game> {

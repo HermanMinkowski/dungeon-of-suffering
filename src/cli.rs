@@ -4,11 +4,14 @@ use crate::Game;
 pub fn game_loop() {
     use std::io::Write;
     let mut game = Game::default();
-    let mut state_function = State::no_input(Game::start);
+    let mut state_function = State::no_input(Game::start, None);
 
     state_function = state_function(&mut game);
 
     while !state_function.completed {
+
+        println!("{}", state_function.output);
+
         if state_function.requires_input {
             let mut buffer = String::new();
             print!("> ");
