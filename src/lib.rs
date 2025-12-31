@@ -10,6 +10,6 @@ pub mod player;
 pub mod state;
 pub mod status;
 pub mod vocabulary;
+mod parsed_input;
 
-pub use cli::game_loop;
 pub use game::Game;

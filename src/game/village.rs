@@ -14,16 +14,13 @@ impl Game {
     }
 
     pub fn help(&mut self) -> State<Game> {
-        let parts = self.parse_command();
 
-        if parts.len() != 1 {
+        let command = self.parsed_input.command;
+
+        if command == Command::Unknown {
             return State::with_input(Self::help, None);
         }
 
-        let verb_part = parts.get(0).map(|s| s.as_str()).unwrap_or("");
-
-        let command = self.vocabulary.commands.parse(verb_part);
-        println!("{}", verb_part);
 
         match command {
             Command::Help => {
@@ -35,18 +32,11 @@ impl Game {
     }
 
     pub fn inn(&mut self) -> State<Game> {
-        let parts = self.parse_command();
+        let command = self.parsed_input.command;
+        let verb = self.parsed_input.verb;
+        let object_part = self.parsed_input.raw_object.to_string();
+        let object = self.parsed_input.object;
 
-        if parts.len() < 1 || parts.len() > 2 {
-            return State::with_input(Self::inn, None);
-        }
-
-        let verb_part = parts.get(0).map(|s| s.as_str()).unwrap_or("");
-        let verb = self.vocabulary.verbs.parse(verb_part);
-        let command = self.vocabulary.commands.parse(verb_part);
-
-        let object_part = parts.get(1).map(|s| s.as_str()).unwrap_or("");
-        let object = self.vocabulary.objects.parse(object_part);
 
         if self.handle_global_commands(command) {
             return State::with_input(Self::inn, None);

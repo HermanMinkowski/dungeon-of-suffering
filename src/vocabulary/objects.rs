@@ -17,7 +17,7 @@ pub struct Objects {
     lookup: HashMap<String, Object>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum Object {
     Bread,
     Notice,
@@ -28,6 +28,7 @@ pub enum Object {
     West,
     Inn,
     Key,
+    #[default]
     Unknown,
 }
 

@@ -13,8 +13,8 @@ pub struct Verbs {
     pub eat: String,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Verb {
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum Verb {    
     Look,
     Take,
     Open,
@@ -24,6 +24,7 @@ pub enum Verb {
     Talk,
     Jump,
     Eat,
+    #[default]
     Unknown,
 }
 
