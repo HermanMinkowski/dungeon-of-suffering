@@ -21,7 +21,7 @@ impl ItemKind {
             ItemKind::Key => "object.key",
             ItemKind::Amulet => "object.amulet",
             ItemKind::Map => "object.map",
-            ItemKind::Purse => "object.pure",
+            ItemKind::Purse => "object.purse",
             ItemKind::Gold => "object.gold",
         }
     }
@@ -30,7 +30,6 @@ impl ItemKind {
 #[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub struct Item {
     pub kind: ItemKind,
-    pub name: &'static str,
     pub amount: u32,
     pub max_amount: u32,
 }
@@ -39,14 +38,13 @@ impl Item {
     pub fn new(kind: ItemKind, amount: u32, max_amount: u32) -> Self {
         Item {
             kind,
-            name: kind.translation_key(),
             amount,
             max_amount,
         }
     }
 
     pub fn new_default(kind: ItemKind) -> Self {
-        Item::new(kind, 0, u32::MAX)
+        Item::new(kind, 1, u32::MAX)
     }
 }
 
@@ -61,16 +59,24 @@ impl Equipment {
     }
 
     pub fn add(&mut self, item: Item) {
-        self.items.push(item);
+        if let Some(existing) = self.items.iter_mut().find(|i| i.kind == item.kind) {
+            existing.amount += item.amount;
+        } else {
+            self.items.push(item);
+        }
     }
 
     pub fn has(&self, item_kind: ItemKind) -> bool {
-        self.items.iter().position(|item| item.kind == item_kind).is_some()
+        self.items.iter().any(|item| item.kind == item_kind)
     }
 
     pub fn remove(&mut self, item_kind: ItemKind) {
-        if let Some(position) = self.items.iter().position(|item| item.kind == item_kind) {
-            self.items.remove(position);
+        if let Some(existing) = self.items.iter_mut().find(|i| i.kind == item_kind) {
+            if existing.amount > 1 {
+                existing.amount -= 1;
+            } else {
+                self.items.retain(|i| i.kind != item_kind);
+            }
         }
     }
 
@@ -80,17 +86,25 @@ impl Equipment {
         Equipment::new(vec![bread])
     }
 
-    pub fn list(&self) {
-        println!("{}", t!("bag.content"));
+    pub fn list(&self) -> String {
+        let mut list = String::new();
 
-        self.items.clone().into_iter().for_each(|item| {
-            print!("* ");
+        list.push_str(&format!("{}\n", t!("bag.content")));
 
-            if item.amount > 1 {
-                print!("{}", item.amount);
-            }
+        for item in &self.items {
+            let amount = if item.amount > 1 {
+                format!("{} ", item.amount)
+            } else {
+                "".to_string()
+            };
 
-            println!("{}", t!(item.kind.translation_key()));
-        });
+            list.push_str(&format!(
+                "* {}{}\n",
+                amount,
+                t!(item.kind.translation_key())
+            ));
+        }
+
+        list
     }
 }

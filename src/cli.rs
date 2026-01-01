@@ -25,7 +25,7 @@ impl Cli     {
     pub fn game_loop(&mut self) {
         rust_i18n::set_locale("fr");
         self.vocabulary.refresh();
-        
+
         self.state_function = (self.state_function)(&mut self.game);
 
         while !self.state_function.completed {
@@ -44,18 +44,21 @@ impl Cli     {
         }
     }
 
+    pub fn normalize(s: &str) -> String {
+        s.nfd()
+            .filter(|c| !is_combining_mark(*c))
+            .filter(|c| c.is_alphanumeric() || c.is_whitespace())
+            .collect::<String>()
+            .to_lowercase()
+    }
+
     fn parse_input(&mut self, input: String) -> ParsedInput {
         let normalized_input = self.normalize_input(input);
         self.generate_parsed_input(normalized_input)
     }
 
     fn normalize_input(&mut self, input: String) -> Vec<String> {
-        input
-            .nfd()
-            .filter(|c| !is_combining_mark(*c))
-            .filter(|c| c.is_alphanumeric() || c.is_whitespace())
-            .collect::<String>()
-            .to_lowercase()
+        Self::normalize(input.as_str())
             .split_whitespace()
             .map(|s| s.to_string())
             .collect()

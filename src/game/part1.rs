@@ -42,4 +42,12 @@ impl Game {
             _ => State::with_input(Self::do_something, None),
         }
     }
+
+
+    /*fn enter_name(&mut self) -> State<Game> {
+        //TODO
+        //std::mem::swap(&mut self.player.name, &mut self.parsed_input.);
+        let text_output = Some(t!("messages.hello", name = self.player.name).to_string());
+        self.display_text(Self::do_something, text_output)
+    }*/
 }

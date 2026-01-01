@@ -1,6 +1,6 @@
 use rust_i18n::t;
 use std::collections::HashMap;
-use unicode_normalization::char::is_combining_mark;
+use crate::cli::Cli;
 
 #[derive(Debug)]
 pub struct Objects {
@@ -67,30 +67,22 @@ impl Objects {
 
     fn rebuild_lookup(&mut self) {
         self.lookup = HashMap::from([
-            (normalize(&self.bread), Object::Bread),
-            (normalize(&self.notice), Object::Notice),
-            (normalize(&self.ginette), Object::Ginette),
-            (normalize(&self.north), Object::North),
-            (normalize(&self.east), Object::East),
-            (normalize(&self.south), Object::South),
-            (normalize(&self.west), Object::West),
-            (normalize(&self.inn), Object::Inn),
-            (normalize(&self.key), Object::Key),
+            (Cli::normalize(&self.bread), Object::Bread),
+            (Cli::normalize(&self.notice), Object::Notice),
+            (Cli::normalize(&self.ginette), Object::Ginette),
+            (Cli::normalize(&self.north), Object::North),
+            (Cli::normalize(&self.east), Object::East),
+            (Cli::normalize(&self.south), Object::South),
+            (Cli::normalize(&self.west), Object::West),
+            (Cli::normalize(&self.inn), Object::Inn),
+            (Cli::normalize(&self.key), Object::Key),
         ]);
     }
 
     pub fn parse(&self, input: &str) -> Object {
-        let key = normalize(input);
+        let key = Cli::normalize(input);
         self.lookup.get(&key).copied().unwrap_or(Object::Unknown)
     }
 }
 
-fn normalize(s: &str) -> String {
-    use unicode_normalization::UnicodeNormalization;
 
-    s.nfd()
-        .filter(|c| !is_combining_mark(*c))
-        .filter(|c| c.is_alphanumeric() || c.is_whitespace())
-        .collect::<String>()
-        .to_lowercase()
-}

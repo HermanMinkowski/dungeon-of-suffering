@@ -3,18 +3,16 @@ mod village;
 
 use crate::doors::Doors;
 use crate::equipment::Equipment;
+use crate::parsed_input::ParsedInput;
 use crate::player::Player;
-use crate::state::State;
+use crate::state::{State, StateFn};
 use crate::status::Status;
 use crate::vocabulary::commands::Command;
 use crate::vocabulary::commands::Commands;
 use crate::vocabulary::objects::Objects;
 use crate::vocabulary::verbs::Verbs;
 use crate::vocabulary::Vocabulary;
-use rust_i18n::{i18n, t};
-use crate::parsed_input::ParsedInput;
-
-i18n!("locales", fallback = "en");
+use rust_i18n::t;
 
 #[derive(Debug)]
 pub struct Game {
@@ -48,14 +46,7 @@ impl Game {
     pub fn start(&mut self) -> State<Game> {
         let text_output = Some(t!("title").to_string());
 
-        State::with_input(Self::intro, text_output)
-    }
-
-    pub fn enter_name(&mut self) -> State<Game> {
-        //TODO
-        //std::mem::swap(&mut self.player.name, &mut self.parsed_input.);
-        let text_output = Some(t!("messages.hello", name = self.player.name).to_string());
-        State::no_input(Self::do_something, text_output)
+        self.display_text(Self::intro, text_output)
     }
 
     pub fn end(&mut self) -> State<Game> {
@@ -75,21 +66,37 @@ impl Game {
         &self.vocabulary.commands
     }
 
-    pub fn handle_global_commands(&mut self, command: Command) -> bool {
+    pub fn handle_global_commands(&mut self, command: Command) -> Option<String> {
         match command {
-            Command::Help => {
-                println!("{}", t!("help.text"));
-                true
-            }
-            Command::Equipment => {
-                self.player.equipments.list();
-                true
-            }
-            Command::Quit => {
-                println!("{}", t!("help.text"));
-                true
-            }
-            _ => false,
+            Command::Help => self.text("help.text"),
+            Command::Equipment => Some(self.player.equipments.list()),
+            Command::Quit => self.text("help.text"),
+            _ => None,
         }
+    }
+
+    fn default_answer(&mut self, next_state: StateFn<Game>) -> State<Game> {
+        let text_output = self.text("cannot.do");
+        self.display_text(next_state, text_output)
+    }
+
+    fn text(&self, key: &str) -> Option<String> {
+        Some(t!(key).to_string())
+    }
+
+    fn text_with_object(&self, key: &str, object: &str) -> Option<String> {
+        Some(t!(key, object = object).to_string())
+    }
+
+    fn display_text(
+        &mut self,
+        next_state: StateFn<Game>,
+        text_output: Option<String>,
+    ) -> State<Game> {
+        State::with_input(next_state, text_output)
+    }
+
+    fn raw_object(&self) -> &str {
+        &self.parsed_input.raw_object
     }
 }
