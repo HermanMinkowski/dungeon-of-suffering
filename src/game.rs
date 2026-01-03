@@ -1,5 +1,6 @@
 mod part1;
 mod village;
+mod cave_entrance;
 
 use crate::doors::Doors;
 use crate::equipment::Equipment;

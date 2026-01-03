@@ -13,6 +13,8 @@ pub struct Objects {
     pub west: String,
     pub inn: String,
     pub key: String,
+    pub parchment: String,
+    pub coal: String,
 
     lookup: HashMap<String, Object>,
 }
@@ -28,6 +30,8 @@ pub enum Object {
     West,
     Inn,
     Key,
+    Parchment,
+    Coal,
     #[default]
     Unknown,
 }
@@ -44,6 +48,8 @@ impl Objects {
             west: t!("object.west").to_string(),
             inn: t!("object.inn").to_string(),
             key: t!("object.key").to_string(),
+            parchment: t!("object.parchment").to_string(),
+            coal: t!("object.coal").to_string(),
             lookup: HashMap::new(),
         };
 
@@ -61,6 +67,8 @@ impl Objects {
         self.west = t!("object.west").to_string();
         self.inn = t!("object.inn").to_string();
         self.key = t!("object.key").to_string();
+        self.parchment = t!("object.parchment").to_string();
+        self.coal = t!("object.coal").to_string();
 
         self.rebuild_lookup();
     }
@@ -76,6 +84,8 @@ impl Objects {
             (Cli::normalize(&self.west), Object::West),
             (Cli::normalize(&self.inn), Object::Inn),
             (Cli::normalize(&self.key), Object::Key),
+            (Cli::normalize(&self.parchment), Object::Parchment),
+            (Cli::normalize(&self.coal), Object::Coal),
         ]);
     }
 
@@ -84,5 +94,3 @@ impl Objects {
         self.lookup.get(&key).copied().unwrap_or(Object::Unknown)
     }
 }
-
-
