@@ -54,41 +54,29 @@ impl Game {
     }
 
     fn entrance_eat(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
+        let text_output: Option<String>;
 
-        match object {
-            Object::Bread => {
-                let text_output: Option<String> ;
-
-                if self.player.equipments.has(ItemKind::Bread) {
-                    text_output = self.text("TODO");
-                    self.player.equipments.remove(ItemKind::Bread);
-                    self.status.hungry = false;
-                } else {
-                    text_output = self.text_with_object("TODO", self.raw_object());
-                }
-                self.display_text(Self::cave_entrance, text_output)
-            }
-            _ => {
-                let text_output = self.text_with_object("TODO", self.raw_object());
-
-                self.display_text(Self::cave_entrance, text_output)
-            }
+        if self.raw_object().is_empty() {
+            text_output = self.text("cannot.eat.nothing");
+        } else {
+            text_output = self.text_with_object("cannot.eat", self.raw_object());
         }
+
+        self.display_text(Self::cave_entrance, text_output)
     }
 
     fn entrance_take(&mut self) -> State<Game> {
         let object = self.parsed_input.object;
 
         match object {
-            Object::Notice => {
+            Object::Coal => {
                 let text_output: Option<String>;
 
-                if self.player.equipments.has(ItemKind::Notice) {
-                    text_output = self.text("TODO");
+                if self.player.equipments.has(ItemKind::Coal) {
+                    text_output = self.text("entrance.take.coal.again");
                 } else {
-                    text_output = self.text("TODO");
-                    self.player.equipments.add(Item::new_default(ItemKind::Notice));
+                    text_output = self.text("entrance.take.coal");
+                    self.player.equipments.add(Item::new_default(ItemKind::Coal));
                 }
 
                 self.display_text(Self::cave_entrance, text_output)             },
@@ -96,9 +84,9 @@ impl Game {
                 let text_output: Option<String>;
 
                 if self.raw_object().is_empty() {
-                    text_output = self.text("TODO");
+                    text_output = self.text("cannot.take.nothing");
                 } else {
-                    text_output = self.text_with_object("TODO", self.raw_object());
+                    text_output = self.text_with_object("cannot.take", self.raw_object());
                 }
 
                 self.display_text(Self::cave_entrance, text_output)
@@ -107,19 +95,10 @@ impl Game {
     }
 
     fn entrance_talk(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-
-        match object {
-            Object::Ginette => {
-                let text_output = self.text("TODO");
-                self.display_text(Self::cave_entrance, text_output)
-            },
-            _ => {
-                let text_output = self.text("TODO");
-                self.display_text(Self::cave_entrance, text_output)
-            },
-        }
+        self.display_text(Self::inn, self.text("cannot.talk"))
     }
+
+    //TODO continue logic implementation here
 
     fn entrance_go(&mut self) -> State<Game> {
         let object = self.parsed_input.object;

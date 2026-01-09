@@ -10,6 +10,7 @@ pub enum ItemKind {
     Map,
     Purse,
     Gold,
+    Coal
 }
 
 impl ItemKind {
@@ -23,6 +24,7 @@ impl ItemKind {
             ItemKind::Map => "object.map",
             ItemKind::Purse => "object.purse",
             ItemKind::Gold => "object.gold",
+            ItemKind::Coal => "object.coal",
         }
     }
 }

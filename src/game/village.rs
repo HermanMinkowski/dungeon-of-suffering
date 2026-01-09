@@ -77,7 +77,7 @@ impl Game {
                     text_output = self.text_with_object("cannot.eat", self.raw_object());
                 }
             }
-            _ => text_output = self.text_with_object("cannot.eat", self.raw_object()),
+            _ => text_output = self.text("cannot.eat.nothing"),
         }
 
         self.display_text(Self::inn, text_output)
