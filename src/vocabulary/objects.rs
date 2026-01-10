@@ -15,6 +15,7 @@ pub struct Objects {
     pub key: String,
     pub parchment: String,
     pub coal: String,
+    pub portcullis: String,
 
     lookup: HashMap<String, Object>,
 }
@@ -32,6 +33,7 @@ pub enum Object {
     Key,
     Parchment,
     Coal,
+    Portcullis,
     #[default]
     Unknown,
 }
@@ -50,6 +52,7 @@ impl Objects {
             key: t!("object.key").to_string(),
             parchment: t!("object.parchment").to_string(),
             coal: t!("object.coal").to_string(),
+            portcullis: t!("object.portcullis").to_string(),
             lookup: HashMap::new(),
         };
 
@@ -69,6 +72,7 @@ impl Objects {
         self.key = t!("object.key").to_string();
         self.parchment = t!("object.parchment").to_string();
         self.coal = t!("object.coal").to_string();
+        self.portcullis = t!("object.portcullis").to_string();
 
         self.rebuild_lookup();
     }
@@ -86,6 +90,7 @@ impl Objects {
             (Cli::normalize(&self.key), Object::Key),
             (Cli::normalize(&self.parchment), Object::Parchment),
             (Cli::normalize(&self.coal), Object::Coal),
+            (Cli::normalize(&self.portcullis), Object::Portcullis),
         ]);
     }
 
