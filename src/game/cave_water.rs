@@ -5,54 +5,53 @@ use crate::vocabulary::verbs::Verb;
 use crate::Game;
 
 impl Game {
-    pub fn cave_entrance(&mut self) -> State<Game> {
+    pub fn cave_water(&mut self) -> State<Game> {
         let command = self.parsed_input.command;
         let verb = self.parsed_input.verb;
 
         let global_command_output = self.handle_global_commands(command);
 
         if global_command_output.is_some() {
-            return self.display_text(Self::cave_entrance, global_command_output);
+            return self.display_text(Self::cave_water, global_command_output);
         }
 
         match verb {
-            Verb::Look => self.entrance_look(),
-            Verb::Take => self.entrance_take(),
-            Verb::Open => self.entrance_open(),
-            Verb::Use => self.entrance_use(),
-            Verb::Push => self.entrance_push(),
-            Verb::Go => self.entrance_go(),
-            Verb::Talk => self.entrance_talk(),
-            Verb::Jump => self.entrance_jump(),
-            Verb::Eat => self.entrance_eat(),
-            _ => self.default_answer(Self::cave_entrance),
+            Verb::Look => self.water_look(),
+            /*Verb::Take => self.water_take(),
+            Verb::Open => self.water_open(),
+            Verb::Use => self.water_use(),
+            Verb::Push => self.water_push(),
+            Verb::Go => self.water_go(),
+            Verb::Talk => self.water_talk(),
+            Verb::Jump => self.water_jump(),
+            Verb::Eat => self.water_eat(),*/
+            _ => self.default_answer(Self::cave_water),
         }
     }
 
-    fn entrance_look(&mut self) -> State<Game> {
+    fn water_look(&mut self) -> State<Game> {
         let text_output: Option<String>;
 
         if self.raw_object().is_empty() {
-            text_output = self.text("entrance.look");
+            text_output = self.text("water.look");
         } else {
-            return self.entrance_look_object();
+            return self.water_look_object();
         }
-        self.display_text(Self::cave_entrance, text_output)
+        self.display_text(Self::cave_water, text_output)
     }
 
-    fn entrance_look_object(&mut self) -> State<Game> {
+    fn water_look_object(&mut self) -> State<Game> {
         let object = self.parsed_input.object;
         let text_output: Option<String>;
 
         match object {
-            Object::Parchment => text_output = self.text("entrance.look.parchment"),
-            Object::Coal => text_output = self.text("entrance.look.coal"),
+            Object::Water => text_output = self.text("water.look.water"),
             _ => text_output = self.text("look.nothing"),
         }
 
-        self.display_text(Self::cave_entrance, text_output)
+        self.display_text(Self::cave_water, text_output)
     }
-
+/*
     fn entrance_eat(&mut self) -> State<Game> {
         let text_output: Option<String>;
 
@@ -110,7 +109,7 @@ impl Game {
         match object {
             Object::South => {
                 text_output = self.text("entrance.go.south");
-                State::with_input(Self::cave_water, text_output)
+                State::with_input(Self::cave_entrance, text_output)
             }
             Object::East => {
                 text_output = self.text("entrance.go.east");
@@ -203,5 +202,5 @@ impl Game {
     fn entrance_jump(&mut self) -> State<Game> {
         let text_output = self.text("cannot.jump");
         self.display_text(Self::cave_entrance, text_output)
-    }
+    }*/
 }
