@@ -75,9 +75,10 @@
   "entrance.go.north": "Le nord, c'est froid et inoffensif. D'un pas décidé vous empruntez le couloir nord.",
   "entrance.open.portcullis": "Impossible d'ouvrir la herse. Elle est trop lourde.",
 
+  "water.look": "Vous vous trouvez dans une grotte lourde d’humidité. Les parois suintent lentement, parcourues de veinures sombres, et une lueur verte émane d'un lichen bioluminescent.\nAu centre de la cavité dort un petit lac d’eau stagnante, immobile comme une plaque de verre noir. Une odeur âcre et organique s’en dégage.",
+  "water.look.water": "Une fois vos yeux adaptés à la luminosité de la grotte, vous prenez le temps d'étudier la surface de l'eau stagnate. Tout aux fond, un peu vers la gauche, vous percevez une faible lueur.",
+  "water.take.water": "Vous prenez une poignée d'eau et la glissez dans votre poche. C'était une idée très moyenne, vos culottes sont toutes humides maintenant.",
 
-  "water.look": "WATERRRRRRRRR.",
-  "water.look.water": "It's wet",
 
 
   "TODO": "TODO!!!!"
