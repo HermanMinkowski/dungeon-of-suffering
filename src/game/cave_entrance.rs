@@ -30,41 +30,43 @@ impl Game {
     }
 
     fn entrance_look(&mut self) -> State<Game> {
-        let text_output: Option<String>;
-
-        if self.raw_object().is_empty() {
-            text_output = self.text("entrance.look");
-        } else {
+        if !self.raw_object().is_empty() {
             return self.entrance_look_object();
         }
-        self.display_text(Self::cave_entrance, text_output)
+
+        let text_key = if self.status.signed_discharge
+            {
+                "entrance.look.signed"
+
+            } else
+            {
+                "entrance.look"
+            };
+
+        self.display_text(Self::cave_entrance, self.text(text_key))
     }
 
     fn entrance_look_object(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
+        let text_key = match self.parsed_input.object {
+            Object::Parchment => "entrance.look.parchment",
+            Object::Coal => "entrance.look.coal",
+            _ => "look.nothing",
+        };
 
-        match object {
-            Object::Parchment => text_output = self.text("entrance.look.parchment"),
-            Object::Coal => text_output = self.text("entrance.look.coal"),
-            _ => text_output = self.text("look.nothing"),
-        }
-
-        self.display_text(Self::cave_entrance, text_output)
+        self.display_text(Self::cave_entrance, self.text(text_key))
     }
 
     fn entrance_eat(&mut self) -> State<Game> {
-        let text_output: Option<String>;
-
-        if self.raw_object().is_empty() {
-            text_output = self.text("cannot.eat.nothing");
+        let text_output = if self.raw_object().is_empty() {
+            self.text("cannot.eat.nothing")
         } else {
-            text_output = self.text_with_object("cannot.eat", self.raw_object());
-        }
+            self.text_with_object("cannot.eat", self.raw_object())
+        };
 
         self.display_text(Self::cave_entrance, text_output)
     }
 
+    //TODO make more idiomatic and remove object variable.
     fn entrance_take(&mut self) -> State<Game> {
         let object = self.parsed_input.object;
         let text_output: Option<String>;

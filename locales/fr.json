@@ -61,6 +61,7 @@
   "inn.go.east.notice": "Avant de partir vous feriez mieux de savoir où vous allez (i.e. avoir une bousolle, un chien pisteur, un guide, un rat attiré par l'aventure, le sens de l'orientation, un ami, une carte...)",
 
   "entrance.look": "Outre la lourde herse qui bloque la sortie, un luxueux parchemin repose sur un rocher au centre de la caverne. Un petit bâtonnet de charbon se trouve juste à côté du parchemin.",
+  "entrance.look.signed": "Une lourde herse bloque la sortie. Trois passages menant respectivement vers le sud, l'est et le nord n'attendent que vous.",
   "entrance.look.parchment": "Il semble s'agir d'une espèce de décharge dégageant de toute responsabilité le propriétaire de la grotte advenant un incident lié à votre nouvel emploi. Le tout est écrit dans une écriture cursive dans un langage verbeux et juridique. Le sens de plusieurs mots vous échappe d'ailleurs.",
   "entrance.look.coal": "C'est un bâtonnet de chabon.",
   "entrance.push.portcullis": "Vous essayez de pousser la herse et vous vous rappelez alors que celle-ci est tombée à partir du plafond. Il faudrait donc la lever. Malheureusement votre force c'est le poussage, lever les choses, ce n'est pas votre tasse de thé. Vous êtes définitivement coincé ici jusqu'à ce que vous trouviez une autre sortie.",
@@ -78,7 +79,7 @@
   "water.look": "Vous vous trouvez dans une grotte lourde d’humidité. Les parois suintent lentement, parcourues de veinures sombres, et une lueur verte émane d'un lichen bioluminescent.\nAu centre de la cavité dort un petit lac d’eau stagnante, immobile comme une plaque de verre noir. Une odeur âcre et organique s’en dégage.",
   "water.look.water": "Une fois vos yeux adaptés à la luminosité de la grotte, vous prenez le temps d'étudier la surface de l'eau stagnate. Tout aux fond, un peu vers la gauche, vous percevez une faible lueur.",
   "water.take.water": "Vous prenez une poignée d'eau et la glissez dans votre poche. C'était une idée très moyenne, vos culottes sont toutes humides maintenant.",
-
+  "water.go.north": "Vous quitter la grotte humide et son petit lac pour retourner vers l'entrée de cette grotte maudite.",
 
 
   "TODO": "TODO!!!!"
