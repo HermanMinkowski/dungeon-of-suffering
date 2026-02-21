@@ -9,10 +9,8 @@ impl Game {
         let command = self.parsed_input.command;
         let verb = self.parsed_input.verb;
 
-        let global_command_output = self.handle_global_commands(command);
-
-        if global_command_output.is_some() {
-            return self.display_text(Self::cave_entrance, global_command_output);
+        if let Some(output) = self.handle_global_commands(command) {
+            return self.display_text(Self::cave_entrance, Some(output));
         }
 
         match verb {
@@ -34,14 +32,11 @@ impl Game {
             return self.entrance_look_object();
         }
 
-        let text_key = if self.status.signed_discharge
-            {
-                "entrance.look.signed"
-
-            } else
-            {
-                "entrance.look"
-            };
+        let text_key = if self.status.signed_discharge {
+            "entrance.look.signed"
+        } else {
+            "entrance.look"
+        };
 
         self.display_text(Self::cave_entrance, self.text(text_key))
     }
@@ -66,30 +61,26 @@ impl Game {
         self.display_text(Self::cave_entrance, text_output)
     }
 
-    //TODO make more idiomatic and remove object variable.
     fn entrance_take(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        match self.parsed_input.object {
             Object::Coal => {
-                if self.player.equipments.has(ItemKind::Coal) {
-                    text_output = self.text("entrance.take.coal.again");
+                let text_output = if self.player.equipments.has(ItemKind::Coal) {
+                    self.text("entrance.take.coal.again")
                 } else {
-                    text_output = self.text("entrance.take.coal");
                     self.player
                         .equipments
                         .add(Item::new_default(ItemKind::Coal));
-                }
+                    self.text("entrance.take.coal")
+                };
 
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.take.nothing");
+                let text_output = if self.raw_object().is_empty() {
+                    self.text("cannot.take.nothing")
                 } else {
-                    text_output = self.text_with_object("cannot.take", self.raw_object());
-                }
+                    self.text_with_object("cannot.take", self.raw_object())
+                };
 
                 self.display_text(Self::cave_entrance, text_output)
             }
@@ -101,63 +92,57 @@ impl Game {
     }
 
     fn entrance_go(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        if self.go_and_has_not_signed_dischage(object) {
-            text_output = self.text("entrance.go.no.discharge");
+        if self.go_and_has_not_signed_discharge(self.parsed_input.object) {
+            let text_output = self.text("entrance.go.no.discharge");
             return self.display_text(Self::cave_entrance, text_output);
         }
 
-        match object {
+        match self.parsed_input.object {
             Object::South => {
-                text_output = self.text("entrance.go.south");
+                let text_output = self.text("entrance.go.south");
                 State::with_input(Self::cave_water, text_output)
             }
             Object::East => {
-                text_output = self.text("entrance.go.east");
+                let text_output = self.text("entrance.go.east");
                 self.display_text(Self::cave_entrance, text_output)
             }
             Object::North => {
-                text_output = self.text("entrance.go.north");
+                let text_output = self.text("entrance.go.north");
                 self.display_text(Self::cave_entrance, text_output)
             }
             Object::West => {
-                text_output = self.text("entrance.go.west");
+                let text_output = self.text("entrance.go.west");
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.go.nowhere");
+                let text_output = if self.raw_object().is_empty() {
+                    self.text("cannot.go.nowhere")
                 } else {
-                    text_output = self.text_with_object("cannot.go", self.raw_object())
-                }
+                    self.text_with_object("cannot.go", self.raw_object())
+                };
 
                 self.display_text(Self::cave_entrance, text_output)
             }
         }
     }
 
-    fn go_and_has_not_signed_dischage(&mut self, object: Object) -> bool {
+    fn go_and_has_not_signed_discharge(&mut self, object: Object) -> bool {
         !self.status.signed_discharge
             && (object == Object::East || object == Object::North || object == Object::South)
     }
 
     fn entrance_open(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        match self.parsed_input.object {
             Object::Portcullis => {
-                text_output = self.text("entrance.open.portcullis");
+                let text_output = self.text("entrance.open.portcullis");
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.open.nothing");
+                let text_output = if self.raw_object().is_empty() {
+                    self.text("cannot.open.nothing")
                 } else {
-                    text_output = self.text_with_object("cannot.open", self.raw_object())
-                }
+                    self.text_with_object("cannot.open", self.raw_object())
+                };
 
                 self.display_text(Self::cave_entrance, text_output)
             }
@@ -165,38 +150,32 @@ impl Game {
     }
 
     fn entrance_use(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        match self.parsed_input.object {
             Object::Coal => {
-                if self.status.signed_discharge {
-                    text_output = self.text("entrance.use.coal.again");
+                let text_output = if self.status.signed_discharge {
+                    self.text("entrance.use.coal.again")
                 } else {
-                    text_output = self.text("entrance.use.coal");
                     self.status.signed_discharge = true;
-                }
+                    self.text("entrance.use.coal")
+                };
 
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                text_output = self.text("cannot.use");
+                let text_output = self.text("cannot.use");
                 self.display_text(Self::cave_entrance, text_output)
             }
         }
     }
 
     fn entrance_push(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        match self.parsed_input.object {
             Object::Portcullis => {
-                text_output = self.text("entrance.push.portcullis");
+                let text_output = self.text("entrance.push.portcullis");
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                text_output = self.text("cannot.push");
+                let text_output = self.text("cannot.push");
                 self.display_text(Self::cave_entrance, text_output)
             }
         }

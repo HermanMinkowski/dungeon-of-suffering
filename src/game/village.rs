@@ -32,10 +32,8 @@ impl Game {
         let command = self.parsed_input.command;
         let verb = self.parsed_input.verb;
 
-        let global_command_output = self.handle_global_commands(command);
-
-        if global_command_output.is_some() {
-            return self.display_text(Self::inn, global_command_output);
+        if let Some(output) = self.handle_global_commands(command) {
+            return self.display_text(Self::inn, Some(output));
         }
 
         match verb {
@@ -53,73 +51,66 @@ impl Game {
     }
 
     fn inn_look(&mut self) -> State<Game> {
-        let text_output: Option<String>;
-
-        if self.raw_object().is_empty() {
-            text_output = self.text("inn.look");
+        let text_output = if self.raw_object().is_empty() {
+            self.text("inn.look")
         } else {
-            text_output = self.text("look.nothing");
-        }
+            self.text("look.nothing")
+        };
+
         self.display_text(Self::inn, text_output)
     }
 
     fn inn_eat(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        let text_output = match self.parsed_input.object {
             Object::Bread => {
                 if self.player.equipments.has(ItemKind::Bread) {
-                    text_output = self.text("inn.eat.bread");
                     self.player.equipments.remove(ItemKind::Bread);
                     self.status.hungry = false;
+                    self.text("inn.eat.bread")
                 } else {
-                    text_output = self.text_with_object("cannot.eat", self.raw_object());
+                    self.text_with_object("cannot.eat", self.raw_object())
                 }
             }
-            _ => text_output = self.text("cannot.eat.nothing"),
-        }
+            _ => self.text("cannot.eat.nothing"),
+        };
 
         self.display_text(Self::inn, text_output)
     }
 
     fn inn_take(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        let text_output = match self.parsed_input.object {
             Object::Notice => {
                 if self.player.equipments.has(ItemKind::Notice) {
-                    text_output = self.text("inn.take.notice.has");
+                    self.text("inn.take.notice.has")
                 } else {
-                    text_output = self.text("inn.take.notice");
                     self.player
                         .equipments
                         .add(Item::new_default(ItemKind::Notice));
+                    self.text("inn.take.notice")
                 }
             }
             _ => {
                 if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.take.nothing");
+                    self.text("cannot.take.nothing")
                 } else {
-                    text_output = self.text_with_object("cannot.take", self.raw_object());
+                    self.text_with_object("cannot.take", self.raw_object())
                 }
             }
-        }
+        };
 
         self.display_text(Self::inn, text_output)
     }
 
     fn inn_talk(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
+        let text_output = match self.parsed_input.object {
+            Object::Ginette => self.text("inn.talk.ginette"),
+            _ => self.text("cannot.talk"),
+        };
 
-        match object {
-            Object::Ginette => text_output = self.text("inn.talk.ginette"),
-            _ => text_output = self.text("cannot.talk"),
-        }
         self.display_text(Self::inn, text_output)
     }
+
+    //TODO Refactor from here
 
     fn inn_go(&mut self) -> State<Game> {
         let object = self.parsed_input.object;
@@ -138,7 +129,7 @@ impl Game {
                 }
 
                 text_output = self.text("inn.go.east");
-                return State::with_input(Self::cave_entrance, text_output)
+                return State::with_input(Self::cave_entrance, text_output);
             }
             Object::Inn => text_output = self.text("inn.go.inn"),
             _ => {
