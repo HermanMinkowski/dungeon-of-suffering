@@ -110,44 +110,35 @@ impl Game {
         self.display_text(Self::inn, text_output)
     }
 
-    //TODO Refactor from here
-
     fn inn_go(&mut self) -> State<Game> {
         let object = self.parsed_input.object;
-        let text_output: Option<String>;
 
-        match object {
-            Object::East => 'not_ready: {
+        let text_output = match object {
+            Object::East => {
                 if self.status.hungry {
-                    text_output = self.text("inn.go.east.hungry");
-                    break 'not_ready;
+                    self.text("inn.go.east.hungry")
+                } else if !self.player.equipments.has(ItemKind::Notice) {
+                    self.text("inn.go.east.notice")
+                } else {
+                    return State::with_input(Self::cave_entrance, self.text("inn.go.east"));
                 }
-
-                if !self.player.equipments.has(ItemKind::Notice) {
-                    text_output = self.text("inn.go.east.notice");
-                    break 'not_ready;
-                }
-
-                text_output = self.text("inn.go.east");
-                return State::with_input(Self::cave_entrance, text_output);
             }
-            Object::Inn => text_output = self.text("inn.go.inn"),
+
+            Object::Inn => self.text("inn.go.inn"),
             _ => {
                 if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.go.nowhere");
+                    self.text("cannot.go.nowhere")
                 } else {
-                    text_output = self.text_with_object("cannot.go", self.raw_object())
+                    self.text_with_object("cannot.go", self.raw_object())
                 }
             }
-        }
+        };
 
         self.display_text(Self::inn, text_output)
     }
 
     fn inn_open(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-
-        match object {
+        match self.parsed_input.object {
             _ => {
                 let text_output = self.text("cannot.do");
                 self.display_text(Self::inn, text_output)
@@ -156,9 +147,7 @@ impl Game {
     }
 
     fn inn_use(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-
-        match object {
+        match self.parsed_input.object {
             _ => {
                 let text_output = self.text("cannot.do");
                 self.display_text(Self::inn, text_output)
@@ -167,9 +156,7 @@ impl Game {
     }
 
     fn inn_push(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-
-        match object {
+        match self.parsed_input.object {
             _ => {
                 let text_output = self.text("cannot.do");
                 self.display_text(Self::inn, text_output)
@@ -178,9 +165,7 @@ impl Game {
     }
 
     fn inn_jump(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-
-        match object {
+        match self.parsed_input.object {
             _ => {
                 let text_output = self.text("cannot.do");
                 self.display_text(Self::inn, text_output)

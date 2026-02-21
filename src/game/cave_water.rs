@@ -32,57 +32,45 @@ impl Game {
     }
 
     fn water_look(&mut self) -> State<Game> {
-        let text_output: Option<String>;
-
-        if self.raw_object().is_empty() {
-            text_output = self.text("water.look");
+        let text_output = if self.raw_object().is_empty() {
+            self.text("water.look")
         } else {
             return self.water_look_object();
-        }
+        };
+
         self.display_text(Self::cave_water, text_output)
     }
 
     fn water_look_object(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
-            Object::Water => text_output = self.text("water.look.water"),
-            _ => text_output = self.text("look.nothing"),
-        }
+        let text_output= match self.parsed_input.object {
+            Object::Water => self.text("water.look.water"),
+            _ => self.text("look.nothing"),
+        };
 
         self.display_text(Self::cave_water, text_output)
     }
 
     fn water_take(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
-            Object::Water => {
-                text_output = self.text("water.take.water");
-                self.display_text(Self::cave_water, text_output)
-            }
+        let text_output = match self.parsed_input.object {
+            Object::Water => self.text("water.take.water"),
             _ => {
                 if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.take.nothing");
+                    self.text("cannot.take.nothing")
                 } else {
-                    text_output = self.text_with_object("cannot.take", self.raw_object());
+                     return State::with_input(Self::cave_entrance, self.text_with_object("cannot.take", self.raw_object()));
                 }
-
-                self.display_text(Self::cave_water, text_output)
             }
-        }
+        };
+
+        self.display_text(Self::cave_water, text_output)
     }
 
     fn water_eat(&mut self) -> State<Game> {
-        let text_output: Option<String>;
-
-        if self.raw_object().is_empty() {
-            text_output = self.text("cannot.eat.nothing");
+        let text_output = if self.raw_object().is_empty() {
+            self.text("cannot.eat.nothing")
         } else {
-            text_output = self.text_with_object("cannot.eat", self.raw_object());
-        }
+            self.text_with_object("cannot.eat", self.raw_object())
+        };
 
         self.display_text(Self::cave_water, text_output)
     }
@@ -92,20 +80,17 @@ impl Game {
     }
 
     fn water_go(&mut self) -> State<Game> {
-        let object = self.parsed_input.object;
-        let text_output: Option<String>;
-
-        match object {
+        match self.parsed_input.object {
             Object::North => {
-                text_output = self.text("water.go.north");
+                let text_output = self.text("water.go.north");
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
-                if self.raw_object().is_empty() {
-                    text_output = self.text("cannot.go.nowhere");
+                let text_output = if self.raw_object().is_empty() {
+                    self.text("cannot.go.nowhere")
                 } else {
-                    text_output = self.text_with_object("cannot.go", self.raw_object())
-                }
+                    self.text_with_object("cannot.go", self.raw_object())
+                };
 
                 self.display_text(Self::cave_water, text_output)
             }
