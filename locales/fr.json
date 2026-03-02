@@ -82,5 +82,13 @@
   "water.go.north": "Vous quitter la grotte humide et son petit lac pour retourner vers l'entrée de cette grotte maudite.",
 
 
+
+  "water.jump.water": "FOLLOW THE LIGHT",
+  "water.jump.water.dead": "DEAD",
+
+
+  "mimic.look": "MIMIC LOOK.",
+
+
   "TODO": "TODO!!!!"
 }

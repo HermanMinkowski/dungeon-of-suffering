@@ -1,6 +1,8 @@
 mod village;
 mod cave_entrance;
 mod cave_water;
+mod cave_mimic;
+
 use crate::doors::Doors;
 use crate::equipment::Equipment;
 use crate::parsed_input::ParsedInput;

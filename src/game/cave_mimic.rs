@@ -4,7 +4,7 @@ use crate::vocabulary::verbs::Verb;
 use crate::Game;
 
 impl Game {
-    pub fn cave_water(&mut self) -> State<Game> {
+    pub fn cave_mimic(&mut self) -> State<Game> {
         let command = self.parsed_input.command;
         let verb = self.parsed_input.verb;
 
@@ -15,31 +15,32 @@ impl Game {
         }
 
         match verb {
-            Verb::Look => self.water_look(),
-            Verb::Take => self.water_take(),
+            Verb::Look => self.mimic_look(),
+            /*Verb::Take => self.water_take(),
             Verb::Go => self.water_go(),
             Verb::Talk => self.water_talk(),
             Verb::Eat => self.water_eat(),
             Verb::Open => self.water_open(),
             Verb::Use => self.water_use(),
             Verb::Push => self.water_push(),
-            Verb::Jump => self.water_jump(),
+            Verb::Jump => self.water_jump(),*/
 
-            _ => self.default_answer(Self::cave_water),
+            _ => self.default_answer(Self::cave_mimic),
         }
     }
 
-    fn water_look(&mut self) -> State<Game> {
+    
+    fn mimic_look(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
-            self.text("water.look")
+            self.text("mimic.look")
         } else {
-            return self.water_look_object();
+            return self.mimic_look_object();
         };
 
         self.display_text(Self::cave_water, text_output)
     }
 
-    fn water_look_object(&mut self) -> State<Game> {
+    fn mimic_look_object(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
             Object::Water => {
                 self.status.saw_the_light = true;
@@ -50,7 +51,7 @@ impl Game {
 
         self.display_text(Self::cave_water, text_output)
     }
-
+/*
     fn water_take(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
             Object::Water => self.text("water.take.water"),
@@ -121,15 +122,14 @@ impl Game {
         self.display_text(Self::cave_water, text_output)
     }
 
-    //TODO IMPLEMENT PROPER DEATH
+    //TODO
     fn water_jump(&mut self) -> State<Game> {
         if self.parsed_input.object == Object::Water {
-            if self.status.saw_the_light {
-                return self.display_text(Self::cave_mimic, self.text("water.jump.water"));
-            }
-            return self.display_text(Self::intro, self.text("water.jump.water.dead"));
+            return self.display_text(Self::cave_entrance, self.text("water.jump.water"));
         }
 
         self.display_text(Self::cave_water, self.text("cannot.jump"))
     }
+    
+ */
 }
