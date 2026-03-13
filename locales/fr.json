@@ -81,10 +81,8 @@
   "water.take.water": "Vous prenez une poignée d'eau et la glissez dans votre poche. C'était une idée très moyenne, vos culottes sont toutes humides maintenant.",
   "water.go.north": "Vous quitter la grotte humide et son petit lac pour retourner vers l'entrée de cette grotte maudite.",
 
-
-
-  "water.jump.water": "FOLLOW THE LIGHT",
-  "water.jump.water.dead": "DEAD",
+  "water.jump.water": "La lueur que vous avez aperçue pourrait peut‑être vous mener à l’extérieur de cette maudite caverne. Vous plongez dans l’eau et nagez sous la surface en direction de la lumière. À un moment, vous croyez percevoir un mouvement à votre gauche. Vous redoublez d’ardeur et atteignez un étroit tunnel d’où provient la lueur. Il s’étend sur quelques mètres, puis remonte légèrement avant de déboucher dans une petite pièce. Une ouverture minuscule laisse filtrer un mince rayon de lumière.\n Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.",
+  "water.jump.water.dead": "Vous plongez dans l’eau, espérant trouver un moyen de vous échapper de cette maudite caverne. Sans la moindre indication pour guider vos recherches, vous avancez à tâtons. Votre main rencontre soudain quelque chose de nettement moins solide que les parois rocheuses que vous avez explorées jusqu’à maintenant. À votre grande surprise, cette 'paroi' vous agrippe avec ce que vous identifiez trop tard comme des dents acérées.\nVotre bras est arraché en un instant, et vos autres membres suivent quelques secondes plus tard. Vous mourez dans un bref moment de souffrance. Ironiquement, vous venez probablement de nourrir l’une des créatures que l’avis de la taverne mentionnait. Malheureusement pour vous, cela ne vous rend pas moins mort.",
 
 
   "mimic.look": "MIMIC LOOK.",
