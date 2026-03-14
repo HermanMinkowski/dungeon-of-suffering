@@ -1,11 +1,8 @@
-use rust_i18n::i18n;
-
-i18n!("locales", fallback = "en");
-
 pub mod cli;
 pub mod doors;
 pub mod equipment;
 pub mod game;
+pub mod i18n;
 pub mod player;
 pub mod state;
 pub mod status;

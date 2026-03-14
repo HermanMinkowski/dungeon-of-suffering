@@ -1,0 +1,17 @@
+bravo = Bravo!
+cannot-take = Cannot take %{object}
+do = Do something!
+help = help
+message-end = This is the end for %{name}
+messages-hello = Hello, %{name}
+name = What is you name?
+object-key = key
+take-key = Take key
+verb-go = go
+verb-jump = jump
+verb-look = look
+verb-open = open
+verb-push = push
+verb-take = take
+verb-talk = talk
+verb-use = use

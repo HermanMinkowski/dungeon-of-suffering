@@ -1,4 +1,4 @@
-use rust_i18n::t;
+use crate::i18n::I18n;
 
 #[derive(Debug)]
 pub struct Commands {
@@ -17,18 +17,18 @@ pub enum Command {
 }
 
 impl Commands {
-    pub fn new() -> Self {
+    pub fn new(i18n: &I18n) -> Self {
         Self {
-            help: t!("command.help").to_string(),
-            equipment: t!("command.equipment").to_string(),
-            quit: t!("command.quit").to_string(),
+            help: i18n.t("command-help", None),
+            equipment: i18n.t("command-equipment", None),
+            quit: i18n.t("command-quit", None),
         }
     }
 
-    pub fn refresh(&mut self) {
-        self.help = t!("command.help").to_string();
-        self.equipment = t!("command.equipment").to_string();
-        self.quit = t!("command.quit").to_string();
+    pub fn refresh(&mut self, i18n: &I18n) {
+        self.help = i18n.t("command-help", None);
+        self.equipment = i18n.t("command-equipment", None);
+        self.quit = i18n.t("command-quit", None);
     }
 
     pub fn parse(&self, input: &str) -> Command {

@@ -7,7 +7,7 @@ use crate::Game;
 
 impl Game {
     pub fn intro(&mut self) -> State<Game> {
-        let text_output = self.text("intro.text");
+        let text_output = self.text("intro-text");
 
         self.display_text(Self::help, text_output)
     }
@@ -21,7 +21,7 @@ impl Game {
 
         match command {
             Command::Help => {
-                let text_output = self.text("help.text");
+                let text_output = self.text("help-text");
                 State::with_input(Self::inn, text_output)
             }
             _ => State::no_input(Self::help, None),
@@ -52,9 +52,9 @@ impl Game {
 
     fn inn_look(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
-            self.text("inn.look")
+            self.text("inn-look")
         } else {
-            self.text("look.nothing")
+            self.text("look-nothing")
         };
 
         self.display_text(Self::inn, text_output)
@@ -66,12 +66,12 @@ impl Game {
                 if self.player.equipments.has(ItemKind::Bread) {
                     self.player.equipments.remove(ItemKind::Bread);
                     self.status.hungry = false;
-                    self.text("inn.eat.bread")
+                    self.text("inn-eat-bread")
                 } else {
-                    self.text_with_object("cannot.eat", self.raw_object())
+                    self.text_with_object("cannot-eat", self.raw_object())
                 }
             }
-            _ => self.text("cannot.eat.nothing"),
+            _ => self.text("cannot-eat-nothing"),
         };
 
         self.display_text(Self::inn, text_output)
@@ -81,19 +81,19 @@ impl Game {
         let text_output = match self.parsed_input.object {
             Object::Notice => {
                 if self.player.equipments.has(ItemKind::Notice) {
-                    self.text("inn.take.notice.has")
+                    self.text("inn-take-notice-has")
                 } else {
                     self.player
                         .equipments
                         .add(Item::new_default(ItemKind::Notice));
-                    self.text("inn.take.notice")
+                    self.text("inn-take-notice")
                 }
             }
             _ => {
                 if self.raw_object().is_empty() {
-                    self.text("cannot.take.nothing")
+                    self.text("cannot-take-nothing")
                 } else {
-                    self.text_with_object("cannot.take", self.raw_object())
+                    self.text_with_object("cannot-take", self.raw_object())
                 }
             }
         };
@@ -103,8 +103,8 @@ impl Game {
 
     fn inn_talk(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
-            Object::Ginette => self.text("inn.talk.ginette"),
-            _ => self.text("cannot.talk"),
+            Object::Ginette => self.text("inn-talk-ginette"),
+            _ => self.text("cannot-talk"),
         };
 
         self.display_text(Self::inn, text_output)
@@ -116,20 +116,20 @@ impl Game {
         let text_output = match object {
             Object::East => {
                 if self.status.hungry {
-                    self.text("inn.go.east.hungry")
+                    self.text("inn-go-east-hungry")
                 } else if !self.player.equipments.has(ItemKind::Notice) {
-                    self.text("inn.go.east.notice")
+                    self.text("inn-go-east-notice")
                 } else {
-                    return State::with_input(Self::cave_entrance, self.text("inn.go.east"));
+                    return State::with_input(Self::cave_entrance, self.text("inn-go-east"));
                 }
             }
 
-            Object::Inn => self.text("inn.go.inn"),
+            Object::Inn => self.text("inn-go-inn"),
             _ => {
                 if self.raw_object().is_empty() {
-                    self.text("cannot.go.nowhere")
+                    self.text("cannot-go-nowhere")
                 } else {
-                    self.text_with_object("cannot.go", self.raw_object())
+                    self.text_with_object("cannot-go", self.raw_object())
                 }
             }
         };
@@ -140,7 +140,7 @@ impl Game {
     fn inn_open(&mut self) -> State<Game> {
         match self.parsed_input.object {
             _ => {
-                let text_output = self.text("cannot.do");
+                let text_output = self.text("cannot-do");
                 self.display_text(Self::inn, text_output)
             }
         }
@@ -149,7 +149,7 @@ impl Game {
     fn inn_use(&mut self) -> State<Game> {
         match self.parsed_input.object {
             _ => {
-                let text_output = self.text("cannot.do");
+                let text_output = self.text("cannot-do");
                 self.display_text(Self::inn, text_output)
             }
         }
@@ -158,7 +158,7 @@ impl Game {
     fn inn_push(&mut self) -> State<Game> {
         match self.parsed_input.object {
             _ => {
-                let text_output = self.text("cannot.do");
+                let text_output = self.text("cannot-do");
                 self.display_text(Self::inn, text_output)
             }
         }
@@ -167,9 +167,10 @@ impl Game {
     fn inn_jump(&mut self) -> State<Game> {
         match self.parsed_input.object {
             _ => {
-                let text_output = self.text("cannot.do");
+                let text_output = self.text("cannot-do");
                 self.display_text(Self::inn, text_output)
             }
         }
     }
 }
+

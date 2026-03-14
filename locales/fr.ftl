@@ -1,0 +1,109 @@
+bag-content = Votre sac contient: 
+bravo = Bravo!
+cannot-do = Vous tournez sur vous-même, sautez sur un pied et grattez votre derrière. Il ne se produit rien d'intéressant.
+cannot-eat = Impossible de manger { $object }
+cannot-eat-nothing = Vous mangez une bonne bouchée d'air. Rien de moins rassasiant.
+cannot-go = Aller en direction de { $object } semble un choix peu judicieux.
+cannot-go-nowhere = Vous ne pouvez pas errer sans direction.
+cannot-jump = Vous sautez sur place. Ce n'est pas très excitant.
+cannot-open = Impossible d'ouvrir { $object }
+cannot-open-nothing = Ouvrir quoi?
+cannot-push = C'est impossible à pousser.
+cannot-take = Impossible de prendre { $object }
+cannot-take-nothing = Vous empochez un énorme poignée de vide.
+cannot-talk = Vous essayez la discussion, mais vous ne récoltez qu'un silence.
+cannot-use = Vous ne trouvez aucun usage à ceci.
+command-equipment = equipment
+command-help = aide
+command-quit = quitter
+do = Fait quelque chose!
+entrance-go-east = Plutôt que de décider au hasard, autant emprunter un chemin central. Bien coincé entre le nord et le sud, ce couloir a l'air plutôt accueillant.
+entrance-go-no-discharge = Il n'y que les parroies de la petite caverne à l'est, au nord et au sud.
+entrance-go-north = Le nord, c'est froid et inoffensif. D'un pas décidé vous empruntez le couloir nord.
+entrance-go-south = Tant qu'à choisir une direction, autant en choisir une qui réchauffe votre coeur. Le sud vous rappelle la douce chaleur du soleil qui caresse votre peau un doux après-midi d'été. Le sud réveille en vous les souvenirs du parfum des larmes de fée, ces petites fleurs jaunes qui poussaient près du ruisseau où vous jouiez étant enfant. Cependant, maintenant que vous prenez une grande inspiration une fois bien engagé dans le tunnel sud, vous trouvez que ça sent plutôt l'humidité et le moisi...
+
+    Vos rêvasseries ainsi brisées, vous marchez un long moment dans ce couloir affichant une pente légèrement descendante. Le léger filet d'eau qui ruisselle le long du chemin le rend glissant et vous avancez avec précaution. Finalement, le passage s'élargit pour déboucher dans une large caverne entièrement remplie par un petit lac souterrain.
+entrance-go-west = Vous ne pouvez pas retouner vers le village. Une lourde herse bloque la sortie de cette caverne. Votre seul option et d'aller de l'avant et de 'nourrir animaux de compagnie pendant une absence prolongée' telque demandé sur l'offre d'emploi à l'auberge.
+entrance-look = Outre la lourde herse qui bloque la sortie, un luxueux parchemin repose sur un rocher au centre de la caverne. Un petit bâtonnet de charbon se trouve juste à côté du parchemin.
+entrance-look-coal = C'est un bâtonnet de chabon.
+entrance-look-parchment = Il semble s'agir d'une espèce de décharge dégageant de toute responsabilité le propriétaire de la grotte advenant un incident lié à votre nouvel emploi. Le tout est écrit dans une écriture cursive dans un langage verbeux et juridique. Le sens de plusieurs mots vous échappe d'ailleurs.
+entrance-look-signed = Une lourde herse bloque la sortie. Trois passages menant respectivement vers le sud, l'est et le nord n'attendent que vous.
+entrance-open-portcullis = Impossible d'ouvrir la herse. Elle est trop lourde.
+entrance-push-portcullis = Vous essayez de pousser la herse et vous vous rappelez alors que celle-ci est tombée à partir du plafond. Il faudrait donc la lever. Malheureusement votre force c'est le poussage, lever les choses, ce n'est pas votre tasse de thé. Vous êtes définitivement coincé ici jusqu'à ce que vous trouviez une autre sortie.
+entrance-take-coal = Vous empochez le bâtonnet de charbon.
+entrance-take-coal-again = Vous avez déjà un bâtonnet de charbon.
+entrance-use-coal = Ce n'est qu'une formalité. Vous empoignez le bâtonnet de charbon et signez la décharge. Quel nom avez-vous signé au bas de la décharge?
+
+    Aussitôt le parchemin signé, il disparaît dans un petit nuage de fumée et trois ouvertures apparaissent dans les murs de la grotte. Ces passages mènent respectivement vers le sud, l'est et le nord. Les murs de chacun de ces tunnels sont légèrement éclairés par une étrange mousse bioluminescente ce qui, sans être équivalent à une bonne vieille lanterne, est suffisant pour s'orienter. Puisque vous êtes pris au piège dans ce nouveau boulot, aussi bien commencer à explorer. Que faites-vous?
+entrance-use-coal-again = Vous avez déjà signé la décharge. Que faites-vous maintenant?
+help-text = Voici ce que vous devez savoir pour naviger en ce monde:
+
+    La vie y est simple, il vous suffit d'un mot ou deux PAS PLUS, pour accomplir tout ce qu'il y a à accomplir. Les actions utiles sont regarder, prendre, ouvrir, utiliser, pousser, aller, parler, sauter, manger. Par exemple, manger pain soulagera votre estomac et regarder vous donnera une description de votre environnement immédiat. Parfois il faut être spécifique comme aller ouest pour vous diriger vers l'ouest et d'autres fois rester plus vague comme parler ou pousser sera suffisant si la situation est claire. N'oubliez pas que vous pouvez aussi utiliser les objets dans votre sac.
+
+    À tout moment, vous pouvez demander de l'AIDE pour vous remémorer le fonctionnement de la vie.
+
+    Equipment vous permet de consulter le contenu de votre sac (que vous avez rapiécé).
+
+inn-eat-bread = Votre estomac ne proteste plus, vous êtes prêt à vous mettre en marche.
+inn-go-east = Vous vous mettez en route vers l'est, espérant que cette offre d'emploi vous permettra de vous faire quelques pièces d'argent. Après une promenade revigorante, vous avez de nouveau faim mais vous vous trouvez à l'entrée d'une sombre grotte, prêt pour votre nouvel emploi. Sitôt le pas franchi, une lourde herse s'abat derrière vous. Il faut croire que la chaînette que vous avez prise pour une sonnette d'entrée en a déclenché la fermeture quand vous l'avez tirée. Vous vous demandez vraiment ce qu'il vous a pris de répondre à cette petite annonce. Peut-être que la trace de sang sur le parchemin ou le sceau lugubre au bas auraient dû vous mettre la puce à l'oreille, mais vous aviez besoin d'argent.
+
+inn-go-east-hungry = Vous n'avez pas assez d'énergie pour entreprendre un voyage.
+inn-go-east-notice = Avant de partir vous feriez mieux de savoir où vous allez (i.e. avoir une bousolle, un chien pisteur, un guide, un rat attiré par l'aventure, le sens de l'orientation, un ami, une carte...)
+inn-go-inn = Sûrement pas, vous n'avez pas un sou.
+inn-look =
+ Vous remarquez une planche de bois faisant office de babillard installée près de l'auberge. Plusieurs avis et parchemins y sont épinglés:
+
+ - Légumes à vendre, pas chair - Gontrand
+ - Ta femme est pas fine? Viens me voir. Je suis fine fine fine. - Ginette
+ - Corvée commune OBLIGATOIRE pour réparer le chemin principal - Hubert, votre honorable MAIRE
+ - Homme ou femme à tout faire recherché(e) pour nourrir animaux de compagnie pendant une absence prolongée. Présentez-vous à l'entrée de la caverne, à une demi-journée de marche à l'est. (une carte très approximative est dessinée au bas de l'avis)
+inn-take-notice = Vous empochez l'avis sur le babillard. Inutile de donner l'occasion à quelqu'un d'autre de vous prendre de vitesse pour cet emploi facile.
+inn-take-notice-has = Vous avez déjà l'avis.
+inn-talk-ginette = Bien essayé. Ginette est bien au chaud à l'intérieur de la taverne tandis que vous êtes contraint à rester à l'extérieur. L'aubergiste ne servira certainement pas un client sans or et tolérera encore moins un client aussi odorant et sale que vous l'êtes.
+intro-text = Assis sur un tronc d'arbre, à l'arrière de l'auberge du village, vous grignotez un morceau de pain sec que le tenancier de l'établissement vous a donné par pitié (et probablement pour vous garder loin de ses clients). Tout a commencé il y a deux semaines quand vous avez décidé de partir à l'aventure. Muni de votre sac à dos plein de provisions, d'une épée de bonne qualité dans son fourreau, votre esprit rempli d'illusions sur les exploits que vous alliez accomplir, vous étiez prêt. Pour entreprendre ce voyage vous avez vendu tous vos avoirs, une vieille mule, un râteau auquel il manquait une dent et le collier de votre grand-mère. Ce dernier n'ayant aucune valeur sentimentale pour vous puisque la vieille vous battait et vous utilisait pratiquement comme un esclave jusqu'à sa mort il y a un peu plus d'un mois. Mangée par des gobelins, a été la conclusion de la courte enquête du chef de la milice locale. C'est la seconde cause de décès au royaume, disait-il, juste après la stupidité. La vieille a dû s'aventurer trop près de la forêt pour cueillir des champignons et a fini en tant que plat principal dans un festin de dégoûtants gobelins.
+
+    Bref, après avoir tout vendu pour la faramineuse somme de 5 pièces d'or, 2 pièces d'argent et 3 pièces de cuivre vous avez quitté votre village natal. Espérant trouver un trésor perdu ou juste un peu de divertissement, vous avez marché vers le nord, l'âme en paix et en communion avec la nature. Jusqu'à ce que cette nature se rebelle contre vous sous la forme d'un violent orage. Loin d'être sot, vous avez trouvé un abri dans une petite grotte à quelques enjambées de la route. La fumée émise par le petit feu que vous aviez fait pour vous réchauffer a dû attirer la racaille parce que, alors que vous étiez sur le point de vous assoupir, un craquement de branches a mis vos sens en alerte. Trois orcs malodorants s'approchaient d'un pas vif de votre campement de fortune. Vous n'avez eu qu'un instant pour plonger entre les jambes de l'orc le plus proche pour éviter le coup de massue qui s'abattit exactement où vous vous trouviez. Alors que vous vous apprêtiez à faire la course de votre vie, le poing du second orc s'écrasa contre votre visage vous faisant perdre un précieux instant. Ce qui donna l'occasion au troisième orc de tenter de vous embrocher avec son épée courte émoussée. Un tantinet plus à gauche et vos entrailles auraient jonché le sol mais, par chance, son épée s'enfonça dans votre sac à dos de voyage répandant tout son contenu sur le sol. Par réflexe, vous avez bien tenté de dégainer votre épée mais celle-ci reposait toujours confortablement près feu où se trouvaient les trois orcs agressifs. Vous avez choisi la solution la plus logique, même si ce n'était probablement pas la plus héroïque : la fuite.
+
+    Bilan de l'incident, vous avez perdu votre arme, le contenu de votre sac et votre fierté. Il vous reste un sac déchiré, vos vêtements trempés et une bourse dans laquelle il ne reste que 3 pièces d'or et 1 pièce d'argent. Qui plus est, vous êtes complètement trempé. Après avoir marché toute la journée pour mettre le plus de distance possible entre vous et les orcs, la chance vous sourit. Vous êtes tombé sur un groupe de quatre aventuriers bivouaquant en bordure du chemin. Ils vous ont invités à profiter de leur feu et à partager leur repas (vos rations de voyage étant probablement déjà dans le ventre d'un orc). Au petit matin, vous vous êtes réveillé frais et dispo mais il n'y avait plus aucune trace de vos compagnons de la veille, ni de votre bourse d'ailleurs.
+
+    Pendant deux jours vous avez marché avant de tomber sur le village où vous vous trouvez maintenant. Vous êtes sans le sou, sale, puant, et le pain sec ne fera taire votre estomac que pour un court moment. Vous avez vraiment besoin d'AIDE, vous devriez demander de l'AIDE.
+look-nothing = Circuler, il n'y a rien à voir!
+message-end = C'est la fin pour { $name }
+messages-hello = Allô, { $name }
+mimic-look = MIMIC LOOK.
+name = Quel est ton nom?
+object-bread = pain
+object-coal = charbon
+object-east = est
+object-ginette = Ginette
+object-inn = auberge
+object-key = cle
+object-north = nord
+object-notice = avis
+object-parchment = parchemin
+object-portcullis = herse
+object-south = sud
+object-water = eau
+object-west = ouest
+take-key = Prendre clé
+title = ******************************  Donjon de la souffrance  ******************************
+
+TODO = TODO!!!!
+verb-eat = manger
+verb-go = aller
+verb-jump = sauter
+verb-look = regarder
+verb-open = ouvrir
+verb-push = pousser
+verb-take = prendre
+verb-talk = parler
+verb-use = utiliser
+water-go-north = Vous quitter la grotte humide et son petit lac pour retourner vers l'entrée de cette grotte maudite.
+water-jump-water = La lueur que vous avez aperçue pourrait peut‑être vous mener à l’extérieur de cette maudite caverne. Vous plongez dans l’eau et nagez sous la surface en direction de la lumière. À un moment, vous croyez percevoir un mouvement à votre gauche. Vous redoublez d’ardeur et atteignez un étroit tunnel d’où provient la lueur. Il s’étend sur quelques mètres, puis remonte légèrement avant de déboucher dans une petite pièce. Une ouverture minuscule laisse filtrer un mince rayon de lumière.
+    Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.
+water-jump-water-dead = Vous plongez dans l’eau, espérant trouver un moyen de vous échapper de cette maudite caverne. Sans la moindre indication pour guider vos recherches, vous avancez à tâtons. Votre main rencontre soudain quelque chose de nettement moins solide que les parois rocheuses que vous avez explorées jusqu’à maintenant. À votre grande surprise, cette 'paroi' vous agrippe avec ce que vous identifiez trop tard comme des dents acérées.
+    Votre bras est arraché en un instant, et vos autres membres suivent quelques secondes plus tard. Vous mourez dans un bref moment de souffrance. Ironiquement, vous venez probablement de nourrir l’une des créatures que l’avis de la taverne mentionnait. Malheureusement pour vous, cela ne vous rend pas moins mort.
+water-look = Vous vous trouvez dans une grotte lourde d’humidité. Les parois suintent lentement, parcourues de veinures sombres, et une lueur verte émane d'un lichen bioluminescent.
+    Au centre de la cavité dort un petit lac d’eau stagnante, immobile comme une plaque de verre noir. Une odeur âcre et organique s’en dégage.
+water-look-water = Une fois vos yeux adaptés à la luminosité de la grotte, vous prenez le temps d'étudier la surface de l'eau stagnate. Tout aux fond, un peu vers la gauche, vous percevez une faible lueur.
+water-take-water = Vous prenez une poignée d'eau et la glissez dans votre poche. C'était une idée très moyenne, vos culottes sont toutes humides maintenant.

@@ -4,7 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-rust-i18n = "3"
-strum = { version = "0.27.2", features=["derive"] }
-strum_macros = "0.27.2"
+fluent-bundle = "0.16.0"
+unic-langid = "0.9.6"
+strum = { version = "0.28.0", features=["derive"] }
+strum_macros = "0.28.0"
 unicode-normalization = "0.1.25"

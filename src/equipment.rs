@@ -1,4 +1,4 @@
-use rust_i18n::t;
+use crate::i18n::I18n;
 
 #[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub enum ItemKind {
@@ -16,15 +16,15 @@ pub enum ItemKind {
 impl ItemKind {
     pub fn translation_key(&self) -> &'static str {
         match self {
-            ItemKind::Sword => "object.sword",
-            ItemKind::Bread => "object.bread",
-            ItemKind::Notice => "object.notice",
-            ItemKind::Key => "object.key",
-            ItemKind::Amulet => "object.amulet",
-            ItemKind::Map => "object.map",
-            ItemKind::Purse => "object.purse",
-            ItemKind::Gold => "object.gold",
-            ItemKind::Coal => "object.coal",
+            ItemKind::Sword => "object-sword",
+            ItemKind::Bread => "object-bread",
+            ItemKind::Notice => "object-notice",
+            ItemKind::Key => "object-key",
+            ItemKind::Amulet => "object-amulet",
+            ItemKind::Map => "object-map",
+            ItemKind::Purse => "object-purse",
+            ItemKind::Gold => "object-gold",
+            ItemKind::Coal => "object-coal",
         }
     }
 }
@@ -88,10 +88,10 @@ impl Equipment {
         Equipment::new(vec![bread])
     }
 
-    pub fn list(&self) -> String {
+    pub fn list(&self, i18n: &I18n) -> String {
         let mut list = String::new();
 
-        list.push_str(&format!("{}\n", t!("bag.content")));
+        list.push_str(&format!("{}\n", i18n.t("bag-content", None)));
 
         for item in &self.items {
             let amount = if item.amount > 1 {
@@ -103,7 +103,7 @@ impl Equipment {
             list.push_str(&format!(
                 "* {}{}\n",
                 amount,
-                t!(item.kind.translation_key())
+                i18n.t(item.kind.translation_key(), None)
             ));
         }
 

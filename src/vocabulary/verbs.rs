@@ -1,4 +1,4 @@
-use rust_i18n::t;
+use crate::i18n::I18n;
 
 #[derive(Debug)]
 pub struct Verbs {
@@ -29,30 +29,30 @@ pub enum Verb {
 }
 
 impl Verbs {
-    pub fn new() -> Self {
+    pub fn new(i18n: &I18n) -> Self {
         Self {
-            look: t!("verb.look").to_string(),
-            take: t!("verb.take").to_string(),
-            open: t!("verb.open").to_string(),
-            use_verb: t!("verb.use").to_string(),
-            push: t!("verb.push").to_string(),
-            go: t!("verb.go").to_string(),
-            talk: t!("verb.talk").to_string(),
-            jump: t!("verb.jump").to_string(),
-            eat: t!("verb.eat").to_string(),
+            look: i18n.t("verb-look", None),
+            take: i18n.t("verb-take", None),
+            open: i18n.t("verb-open", None),
+            use_verb: i18n.t("verb-use", None),
+            push: i18n.t("verb-push", None),
+            go: i18n.t("verb-go", None),
+            talk: i18n.t("verb-talk", None),
+            jump: i18n.t("verb-jump", None),
+            eat: i18n.t("verb-eat", None),
         }
     }
 
-    pub fn refresh(&mut self) {
-        self.look = t!("verb.look").to_string();
-        self.take = t!("verb.take").to_string();
-        self.open = t!("verb.open").to_string();
-        self.use_verb = t!("verb.use").to_string();
-        self.push = t!("verb.push").to_string();
-        self.go = t!("verb.go").to_string();
-        self.talk = t!("verb.talk").to_string();
-        self.jump = t!("verb.jump").to_string();
-        self.eat = t!("verb.eat").to_string();
+    pub fn refresh(&mut self, i18n: &I18n) {
+        self.look = i18n.t("verb-look", None);
+        self.take = i18n.t("verb-take", None);
+        self.open = i18n.t("verb-open", None);
+        self.use_verb = i18n.t("verb-use", None);
+        self.push = i18n.t("verb-push", None);
+        self.go = i18n.t("verb-go", None);
+        self.talk = i18n.t("verb-talk", None);
+        self.jump = i18n.t("verb-jump", None);
+        self.eat = i18n.t("verb-eat", None);
     }
 
     pub fn parse(&self, input: &str) -> Verb {

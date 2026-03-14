@@ -1,14 +1,13 @@
 use crate::parsed_input::ParsedInput;
 use crate::state::State;
-use crate::vocabulary::Vocabulary;
 use crate::Game;
 use unicode_normalization::char::is_combining_mark;
 use unicode_normalization::UnicodeNormalization;
 use std::io::Write;
+
 pub struct Cli {
     game: Game,
     state_function: State<Game>,
-    vocabulary: Vocabulary,
 }
 
 impl Default for Cli {
@@ -16,15 +15,12 @@ impl Default for Cli {
         Cli {
             game: Game::default(),
             state_function: State::no_input(Game::start, None),
-            vocabulary: Vocabulary::new(),
         }
     }
 }
 
-impl Cli     {
+impl Cli {
     pub fn game_loop(&mut self) {
-        rust_i18n::set_locale("fr");
-        self.vocabulary.refresh();
 
         self.state_function = (self.state_function)(&mut self.game);
 
@@ -70,11 +66,11 @@ impl Cli     {
         }
 
         let verb_part = normalize_input.get(0).map(|s| s.as_str()).unwrap_or("");
-        let verb = self.vocabulary.verbs.parse(verb_part);
-        let command = self.vocabulary.commands.parse(verb_part);
+        let verb = self.game.vocabulary.verbs.parse(verb_part);
+        let command = self.game.vocabulary.commands.parse(verb_part);
 
         let object_part = normalize_input.get(1).map(|s| s.as_str()).unwrap_or("");
-        let object = self.vocabulary.objects.parse(object_part);
+        let object = self.game.vocabulary.objects.parse(object_part);
 
         ParsedInput::new(verb, command, object, object_part.to_string())
     }

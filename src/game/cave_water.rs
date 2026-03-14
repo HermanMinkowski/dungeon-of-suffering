@@ -31,7 +31,7 @@ impl Game {
 
     fn water_look(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
-            self.text("water.look")
+            self.text("water-look")
         } else {
             return self.water_look_object();
         };
@@ -43,9 +43,9 @@ impl Game {
         let text_output = match self.parsed_input.object {
             Object::Water => {
                 self.status.saw_the_light = true;
-                self.text("water.look.water")
+                self.text("water-look-water")
             }
-            _ => self.text("look.nothing"),
+            _ => self.text("look-nothing"),
         };
 
         self.display_text(Self::cave_water, text_output)
@@ -53,14 +53,14 @@ impl Game {
 
     fn water_take(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
-            Object::Water => self.text("water.take.water"),
+            Object::Water => self.text("water-take-water"),
             _ => {
                 if self.raw_object().is_empty() {
-                    self.text("cannot.take.nothing")
+                    self.text("cannot-take-nothing")
                 } else {
                     return State::with_input(
                         Self::cave_entrance,
-                        self.text_with_object("cannot.take", self.raw_object()),
+                        self.text_with_object("cannot-take", self.raw_object()),
                     );
                 }
             }
@@ -71,29 +71,29 @@ impl Game {
 
     fn water_eat(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
-            self.text("cannot.eat.nothing")
+            self.text("cannot-eat-nothing")
         } else {
-            self.text_with_object("cannot.eat", self.raw_object())
+            self.text_with_object("cannot-eat", self.raw_object())
         };
 
         self.display_text(Self::cave_water, text_output)
     }
 
     fn water_talk(&mut self) -> State<Game> {
-        self.display_text(Self::inn, self.text("cannot.talk"))
+        self.display_text(Self::inn, self.text("cannot-talk"))
     }
 
     fn water_go(&mut self) -> State<Game> {
         match self.parsed_input.object {
             Object::North => {
-                let text_output = self.text("water.go.north");
+                let text_output = self.text("water-go-north");
                 self.display_text(Self::cave_entrance, text_output)
             }
             _ => {
                 let text_output = if self.raw_object().is_empty() {
-                    self.text("cannot.go.nowhere")
+                    self.text("cannot-go-nowhere")
                 } else {
-                    self.text_with_object("cannot.go", self.raw_object())
+                    self.text_with_object("cannot-go", self.raw_object())
                 };
 
                 self.display_text(Self::cave_water, text_output)
@@ -103,21 +103,21 @@ impl Game {
 
     fn water_open(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
-            self.text("cannot.open.nothing")
+            self.text("cannot-open-nothing")
         } else {
-            self.text_with_object("cannot.open", self.raw_object())
+            self.text_with_object("cannot-open", self.raw_object())
         };
 
         self.display_text(Self::cave_entrance, text_output)
     }
 
     fn water_use(&mut self) -> State<Game> {
-        let text_output = self.text("cannot.use");
+        let text_output = self.text("cannot-use");
         self.display_text(Self::cave_water, text_output)
     }
 
     fn water_push(&mut self) -> State<Game> {
-        let text_output = self.text("cannot.push");
+        let text_output = self.text("cannot-push");
         self.display_text(Self::cave_water, text_output)
     }
 
@@ -125,11 +125,12 @@ impl Game {
     fn water_jump(&mut self) -> State<Game> {
         if self.parsed_input.object == Object::Water {
             if self.status.saw_the_light {
-                return self.display_text(Self::cave_mimic, self.text("water.jump.water"));
+                return self.display_text(Self::cave_mimic, self.text("water-jump-water"));
             }
-            return self.display_text(Self::intro, self.text("water.jump.water.dead"));
+            return self.display_text(Self::intro, self.text("water-jump-water-dead"));
         }
 
-        self.display_text(Self::cave_water, self.text("cannot.jump"))
+        self.display_text(Self::cave_water, self.text("cannot-jump"))
     }
 }
+

@@ -1,4 +1,4 @@
-use rust_i18n::t;
+use crate::i18n::I18n;
 use std::collections::HashMap;
 use crate::cli::Cli;
 
@@ -41,21 +41,21 @@ pub enum Object {
 }
 
 impl Objects {
-    pub fn new() -> Self {
+    pub fn new(i18n: &I18n) -> Self {
         let mut this = Self {
-            bread: t!("object.bread").to_string(),
-            notice: t!("object.notice").to_string(),
-            ginette: t!("object.ginette").to_string(),
-            north: t!("object.north").to_string(),
-            east: t!("object.east").to_string(),
-            south: t!("object.south").to_string(),
-            west: t!("object.west").to_string(),
-            inn: t!("object.inn").to_string(),
-            key: t!("object.key").to_string(),
-            parchment: t!("object.parchment").to_string(),
-            coal: t!("object.coal").to_string(),
-            portcullis: t!("object.portcullis").to_string(),
-            water: t!("object.water").to_string(),
+            bread: i18n.t("object-bread", None),
+            notice: i18n.t("object-notice", None),
+            ginette: i18n.t("object-ginette", None),
+            north: i18n.t("object-north", None),
+            east: i18n.t("object-east", None),
+            south: i18n.t("object-south", None),
+            west: i18n.t("object-west", None),
+            inn: i18n.t("object-inn", None),
+            key: i18n.t("object-key", None),
+            parchment: i18n.t("object-parchment", None),
+            coal: i18n.t("object-coal", None),
+            portcullis: i18n.t("object-portcullis", None),
+            water: i18n.t("object-water", None),
             lookup: HashMap::new(),
         };
 
@@ -63,20 +63,20 @@ impl Objects {
         this
     }
 
-    pub fn refresh(&mut self) {
-        self.bread = t!("object.bread").to_string();
-        self.notice = t!("object.notice").to_string();
-        self.ginette = t!("object.ginette").to_string();
-        self.north = t!("object.north").to_string();
-        self.east = t!("object.east").to_string();
-        self.south = t!("object.south").to_string();
-        self.west = t!("object.west").to_string();
-        self.inn = t!("object.inn").to_string();
-        self.key = t!("object.key").to_string();
-        self.parchment = t!("object.parchment").to_string();
-        self.coal = t!("object.coal").to_string();
-        self.portcullis = t!("object.portcullis").to_string();
-        self.water = t!("object.water").to_string();
+    pub fn refresh(&mut self, i18n: &I18n) {
+        self.bread = i18n.t("object-bread", None);
+        self.notice = i18n.t("object-notice", None);
+        self.ginette = i18n.t("object-ginette", None);
+        self.north = i18n.t("object-north", None);
+        self.east = i18n.t("object-east", None);
+        self.south = i18n.t("object-south", None);
+        self.west = i18n.t("object-west", None);
+        self.inn = i18n.t("object-inn", None);
+        self.key = i18n.t("object-key", None);
+        self.parchment = i18n.t("object-parchment", None);
+        self.coal = i18n.t("object-coal", None);
+        self.portcullis = i18n.t("object-portcullis", None);
+        self.water = i18n.t("object-water", None);
 
         self.rebuild_lookup();
     }
