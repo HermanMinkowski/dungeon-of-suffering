@@ -1,43 +1,61 @@
+use crate::ui::UI;
 use crate::parsed_input::ParsedInput;
 use crate::state::State;
 use crate::Game;
 use unicode_normalization::char::is_combining_mark;
 use unicode_normalization::UnicodeNormalization;
-use std::io::Write;
 
 pub struct Cli {
-    game: Game,
-    state_function: State<Game>,
-}
-
-impl Default for Cli {
-    fn default() -> Self {
-        Cli {
-            game: Game::default(),
-            state_function: State::no_input(Game::start, None),
-        }
-    }
+    pub game: Game,
+    pub state_function: State<Game>,
+    ui: Box<dyn UI>,
 }
 
 impl Cli {
-    pub fn game_loop(&mut self) {
+    pub fn new(ui: Box<dyn UI>) -> Self {
+        Cli {
+            game: Game::default(),
+            state_function: State::no_input(Game::start, None),
+            ui,
+        }
+    }
 
+    pub fn game_loop(&mut self) {
         self.state_function = (self.state_function)(&mut self.game);
 
         while !self.state_function.completed {
-            println!("{}", self.state_function.output);
+            self.ui.print(&self.state_function.output);
 
             if self.state_function.requires_input {
-                let mut buffer = String::new();
-                print!("> ");
-                std::io::stdout().flush().unwrap();
-                std::io::stdin().read_line(&mut buffer).unwrap();
-                self.game.parsed_input = self.parse_input(buffer.trim().to_owned());
+                let input = self.ui.prompt("> ");
+                self.game.parsed_input = self.parse_input(input.trim().to_owned());
             } else {
                 self.game.parsed_input = ParsedInput::default();
             }
+
             self.state_function = (self.state_function)(&mut self.game);
         }
+    }
+
+    pub fn start(&mut self) -> String {
+        self.state_function = (self.state_function)(&mut self.game);
+        self.state_function.output.clone()
+    }
+
+    pub fn submit(&mut self, input: Option<&str>) -> String {
+        if self.state_function.requires_input {
+            let in_str = input.unwrap_or("").to_string();
+            self.game.parsed_input = self.parse_input(in_str);
+        } else {
+            self.game.parsed_input = ParsedInput::default();
+        }
+
+        self.state_function = (self.state_function)(&mut self.game);
+        self.state_function.output.clone()
+    }
+
+    pub fn is_completed(&self) -> bool {
+        self.state_function.completed
     }
 
     pub fn normalize(s: &str) -> String {

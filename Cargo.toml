@@ -9,3 +9,8 @@ unic-langid = "0.9.6"
 strum = { version = "0.28.0", features=["derive"] }
 strum_macros = "0.28.0"
 unicode-normalization = "0.1.25"
+wasm-bindgen = "0.2.114"
+
+[lib]
+crate-type = ["cdylib"]
+

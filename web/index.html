@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dungeon of Suffering (WASM)</title>
+    <style>
+        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 1rem; }
+        #output { white-space: pre-wrap; background:#111; color:#e6e6e6; padding:1rem; border-radius:6px; min-height:200px; }
+        #controls { margin-top:0.75rem; display:flex; gap:0.5rem; }
+        #input { flex:1; padding:0.5rem; font-size:1rem; }
+        button { padding:0.5rem 0.75rem; font-size:1rem; }
+        .muted { color:#666; font-size:0.9rem; margin-top:0.5rem; }
+    </style>
+</head>
+<body>
+<h1>Dungeon of Suffering</h1>
+
+<div id="output" aria-live="polite"></div>
+
+<div id="controls">
+    <input id="input" type="text" autocomplete="off" placeholder="Type a command and press Enter" />
+    <button id="send">Send</button>
+    <button id="restart">Restart</button>
+</div>
+
+<div class="muted">Tip: press Enter to submit. The page expects <code>dungeon-of-suffering.js</code> and <code>dungeon_of_suffering_bg.wasm</code> in the same folder.</div>
+
+<script type="module">
+    import init, { wasm_start, wasm_submit, wasm_is_completed } from './dungeon_of_suffering.js';
+
+    const outEl = document.getElementById('output');
+    const inputEl = document.getElementById('input');
+    const sendBtn = document.getElementById('send');
+    const restartBtn = document.getElementById('restart');
+
+    function showOnlyLatest(text) {
+        outEl.textContent = text;      // replace whole content
+        outEl.scrollTop = outEl.scrollHeight;
+    }
+
+
+    function showInitialOutput() {
+        try {
+            const first = wasm_start();
+            showOnlyLatest(first);
+            updateControls();
+        } catch (e) {
+            console.error('wasm_start failed', e);
+            showOnlyLatest('Error: failed to start the game. See console for details.');
+        }
+    }
+
+    function submitInput(value) {
+        try {
+            const next = wasm_submit(value);
+            if (next && next.length) showOnlyLatest(next);
+            updateControls();
+        } catch (e) {
+            console.error('wasm_submit failed', e);
+            showOnlyLatest('Error: failed to submit input. See console for details.');
+        }
+    }
+
+    function updateControls() {
+        const done = wasm_is_completed();
+        sendBtn.disabled = done;
+        inputEl.disabled = done;
+        if (done) showOnlyLatest('--- Game completed ---');
+    }
+
+    // Wire UI events
+    sendBtn.addEventListener('click', () => {
+        const v = inputEl.value.trim();
+        submitInput(v);
+        inputEl.value = '';
+        inputEl.focus();
+    });
+
+    inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendBtn.click();
+        }
+    });
+
+    restartBtn.addEventListener('click', () => {
+        // reload the page to reinitialize the wasm module and game state
+        location.reload();
+    });
+
+    // Initialize wasm and start the game
+    (async () => {
+        try {
+            await init(); // initializes the wasm module and returns the wasm exports
+            showInitialOutput();
+            inputEl.focus();
+        } catch (e) {
+            console.error('WASM init failed', e);
+            showOnlyLatest('Error: failed to initialize WebAssembly. Check console and ensure the .wasm file is served with application/wasm MIME type.');
+        }
+    })();
+</script>
+</body>
+</html>
