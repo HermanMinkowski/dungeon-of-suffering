@@ -37,19 +37,20 @@ impl Game {
             return self.mimic_look_object();
         };
 
-        self.display_text(Self::cave_water, text_output)
+        self.display_text(Self::cave_mimic, text_output)
     }
 
     fn mimic_look_object(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
-            Object::Water => {
-                self.status.saw_the_light = true;
-                self.text("water-look-water")
-            }
+            Object::Water => self.text("mimic-look-water"),
+            Object::Chest => self.text("mimic-look-chest"),
+            Object::Window => self.text("mimic-look-window"),
+            Object::Window2 => self.text("mimic-look-window"),
+            Object::Bird => self.text("mimic-look-bird"),
             _ => self.text("look-nothing"),
         };
 
-        self.display_text(Self::cave_water, text_output)
+        self.display_text(Self::cave_mimic, text_output)
     }
 /*
     fn water_take(&mut self) -> State<Game> {

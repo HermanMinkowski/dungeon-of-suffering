@@ -32,10 +32,11 @@ entrance-open-portcullis = Impossible d'ouvrir la herse. Elle est trop lourde.
 entrance-push-portcullis = Vous essayez de pousser la herse et vous vous rappelez alors que celle-ci est tombée à partir du plafond. Il faudrait donc la lever. Malheureusement votre force c'est le poussage, lever les choses, ce n'est pas votre tasse de thé. Vous êtes définitivement coincé ici jusqu'à ce que vous trouviez une autre sortie.
 entrance-take-coal = Vous empochez le bâtonnet de charbon.
 entrance-take-coal-again = Vous avez déjà un bâtonnet de charbon.
-entrance-use-coal = Ce n'est qu'une formalité. Vous empoignez le bâtonnet de charbon et signez la décharge. Quel nom avez-vous signé au bas de la décharge?
+entrance-use-coal = Ce n'est qu'une formalité. Vous utilisez le bâtonnet de charbon et signez la décharge.
 
     Aussitôt le parchemin signé, il disparaît dans un petit nuage de fumée et trois ouvertures apparaissent dans les murs de la grotte. Ces passages mènent respectivement vers le sud, l'est et le nord. Les murs de chacun de ces tunnels sont légèrement éclairés par une étrange mousse bioluminescente ce qui, sans être équivalent à une bonne vieille lanterne, est suffisant pour s'orienter. Puisque vous êtes pris au piège dans ce nouveau boulot, aussi bien commencer à explorer. Que faites-vous?
 entrance-use-coal-again = Vous avez déjà signé la décharge. Que faites-vous maintenant?
+entrance-use-coal-without-coal = Vous n'avez pas pris le bâtonnet de charbon. Il est toujours sur le rocher au centre de la caverne.
 help-text = Voici ce que vous devez savoir pour naviger en ce monde:
 
     La vie y est simple, il vous suffit d'un mot ou deux PAS PLUS, pour accomplir tout ce qu'il y a à accomplir. Les actions utiles sont regarder, prendre, ouvrir, utiliser, pousser, aller, parler, sauter, manger. Par exemple, manger pain soulagera votre estomac et regarder vous donnera une description de votre environnement immédiat. Parfois il faut être spécifique comme aller ouest pour vous diriger vers l'ouest et d'autres fois rester plus vague comme parler ou pousser sera suffisant si la situation est claire. N'oubliez pas que vous pouvez aussi utiliser les objets dans votre sac.
@@ -70,9 +71,21 @@ intro-text = Assis sur un tronc d'arbre, à l'arrière de l'auberge du village, 
 look-nothing = Circuler, il n'y a rien à voir!
 message-end = C'est la fin pour { $name }
 messages-hello = Allô, { $name }
-mimic-look = MIMIC LOOK.
+mimic-look = Vous vous trouvez dans une petite pièce, une ouverture minuscule fait office de fenêtre et laisse filtrer un mince rayon de lumière.
+
+    Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.
+
+    L'ouverture remplie d'eau par laquelle vous êtes entré se trouve à votre dos. Vous ne voyez aucune autre sortie.
+mimic-look-bird = Vous vous approchez de la fenêtre et regardez à l'extérieur. Vous apercevez un oiseau perché sur une branche d'arbre, chantant joyeusement. Il semble complètement indifférent à votre présence, ce qui est plutôt rassurant. Sur le sol, au pied de l'arbre, une clé dorée repose dans l'herbe, scintillant faiblement à la lumière du soleil.
+mimic-look-chest = Un solide coffre en bois, renforcé de lourdes bandes de métal, trône au centre de la pièce. Il ne semble toutefois doté ni de serrure ni de cadenas. Il est richement décoré de motifs complexes et de gravures mystérieuses, suggérant qu'il pourrait renfermer des trésors inestimables ou des secrets anciens.
+mimic-look-water = Vous regarder l'eau qui remplit l'ouverture par laquelle vous êtes entré. L'eau est sombre et stagnante, reflétant faiblement la lumière qui filtre à travers la fenêtre. Vous ne voyez rien d'autre que votre propre reflet déformé par les ondulations de l'eau.
+mimic-look-window = Vous vous approchez de la fenêtre et regardez à l'extérieur. Vous apercevez un paysage verdoyant, avec un arbre majestueux dans lequel est perché un ouseau. Sur le sol, au pied de l'arbre, une clé dorée repose dans l'herbe, scintillant faiblement à la lumière du soleil.
+
+    Le soleil brille haut dans le ciel, illuminant la scène d'une lumière chaleureuse et apaisante. C'est un contraste frappant avec l'obscurité de la pièce où vous vous trouvez et cela vous donne un sentiment d'espoir et de liberté, même si vous êtes encore prisonnier de cette maudite caverne.
 name = Quel est ton nom?
+object-bird = oiseau
 object-bread = pain
+object-chest = coffre
 object-coal = charbon
 object-east = est
 object-ginette = Ginette
@@ -85,6 +98,8 @@ object-portcullis = herse
 object-south = sud
 object-water = eau
 object-west = ouest
+object-window = fenêtre
+object-window2 = ouverture
 take-key = Prendre clé
 title = ******************************  Donjon de la souffrance  ******************************
 
@@ -99,7 +114,12 @@ verb-take = prendre
 verb-talk = parler
 verb-use = utiliser
 water-go-north = Vous quitter la grotte humide et son petit lac pour retourner vers l'entrée de cette grotte maudite.
-water-jump-water = La lueur que vous avez aperçue pourrait peut‑être vous mener à l’extérieur de cette maudite caverne. Vous plongez dans l’eau et nagez sous la surface en direction de la lumière. À un moment, vous croyez percevoir un mouvement à votre gauche. Vous redoublez d’ardeur et atteignez un étroit tunnel d’où provient la lueur. Il s’étend sur quelques mètres, puis remonte légèrement avant de déboucher dans une petite pièce. Une ouverture minuscule laisse filtrer un mince rayon de lumière.
+water-jump-water = La lueur que vous avez aperçue pourrait peut‑être vous mener à l’extérieur de cette maudite caverne. Vous plongez dans l’eau et nagez sous la surface en direction de la lumière.
+
+   À un moment, vous croyez percevoir un mouvement à votre gauche. Vous redoublez d’ardeur et atteignez un étroit tunnel d’où provient la lueur. Il s’étend sur quelques mètres, puis remonte légèrement avant de déboucher dans une petite pièce.
+
+    Une ouverture minuscule laisse filtrer un mince rayon de lumière.
+
     Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.
 water-jump-water-dead = Vous plongez dans l’eau, espérant trouver un moyen de vous échapper de cette maudite caverne. Sans la moindre indication pour guider vos recherches, vous avancez à tâtons. Votre main rencontre soudain quelque chose de nettement moins solide que les parois rocheuses que vous avez explorées jusqu’à maintenant. À votre grande surprise, cette 'paroi' vous agrippe avec ce que vous identifiez trop tard comme des dents acérées.
     Votre bras est arraché en un instant, et vos autres membres suivent quelques secondes plus tard. Vous mourez dans un bref moment de souffrance. Ironiquement, vous venez probablement de nourrir l’une des créatures que l’avis de la taverne mentionnait. Malheureusement pour vous, cela ne vous rend pas moins mort.

@@ -17,6 +17,10 @@ pub struct Objects {
     pub coal: String,
     pub portcullis: String,
     pub water: String,
+    pub chest: String,
+    pub window: String,
+    pub window2: String,
+    pub bird: String,
 
     lookup: HashMap<String, Object>,
 }
@@ -36,6 +40,10 @@ pub enum Object {
     Coal,
     Portcullis,
     Water,
+    Chest,
+    Window,
+    Window2,
+    Bird,
     #[default]
     Unknown,
 }
@@ -56,6 +64,10 @@ impl Objects {
             coal: i18n.t("object-coal", None),
             portcullis: i18n.t("object-portcullis", None),
             water: i18n.t("object-water", None),
+            chest: i18n.t("object-chest", None),
+            window: i18n.t("object-window", None),
+            window2: i18n.t("object-window2", None),
+            bird: i18n.t("object-bird", None),
             lookup: HashMap::new(),
         };
 
@@ -77,6 +89,10 @@ impl Objects {
         self.coal = i18n.t("object-coal", None);
         self.portcullis = i18n.t("object-portcullis", None);
         self.water = i18n.t("object-water", None);
+        self.chest = i18n.t("object-chest", None);
+        self.window = i18n.t("object-window", None);
+        self.window2 = i18n.t("object-window2", None);
+        self.bird = i18n.t("object-bird", None);
 
         self.rebuild_lookup();
     }
@@ -96,6 +112,10 @@ impl Objects {
             (Cli::normalize(&self.coal), Object::Coal),
             (Cli::normalize(&self.portcullis), Object::Portcullis),
             (Cli::normalize(&self.water), Object::Water),
+            (Cli::normalize(&self.chest), Object::Chest),
+            (Cli::normalize(&self.window), Object::Window),
+            (Cli::normalize(&self.window2), Object::Window2),
+            (Cli::normalize(&self.bird), Object::Bird),
         ]);
     }
 

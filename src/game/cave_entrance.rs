@@ -152,7 +152,10 @@ impl Game {
     fn entrance_use(&mut self) -> State<Game> {
         match self.parsed_input.object {
             Object::Coal => {
-                let text_output = if self.status.signed_discharge {
+                let text_output = if !self.player.equipments.has(ItemKind::Coal) {
+                    self.text("entrance-use-coal-without-coal")
+                }
+                else if self.status.signed_discharge {
                     self.text("entrance-use-coal-again")
                 } else {
                     self.status.signed_discharge = true;
