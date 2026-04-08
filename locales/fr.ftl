@@ -82,6 +82,12 @@ mimic-look-water = Vous regarder l'eau qui remplit l'ouverture par laquelle vous
 mimic-look-window = Vous vous approchez de la fenêtre et regardez à l'extérieur. Vous apercevez un paysage verdoyant, avec un arbre majestueux dans lequel est perché un ouseau. Sur le sol, au pied de l'arbre, une clé dorée repose dans l'herbe, scintillant faiblement à la lumière du soleil.
 
     Le soleil brille haut dans le ciel, illuminant la scène d'une lumière chaleureuse et apaisante. C'est un contraste frappant avec l'obscurité de la pièce où vous vous trouvez et cela vous donne un sentiment d'espoir et de liberté, même si vous êtes encore prisonnier de cette maudite caverne.
+mimic-take-bird = L'oiseau est bien trop loin pour être attrappé. Peut-être pourriez vous l'attier avec de la nourriture.
+mimic-take-chest = Le coffre est massif. Impossible de le faire entrer dans votre poche ou même de le trainer sur votre dos. Vous vous feriez un tour de rein à essayer de le soulever et le dernier ramancheux que vous avez consulté vous a seulement soulagé d'aucune douleurs, mais de plusieurs pièces d'or.
+mimic-take-key = La clé est trop loin, vous ne pouvez pas l'atteindre.
+mimic-take-water = Non. Vous n'avez aucune envie de vous mouiller à nouveau pour l'instant. Vos sous-vêtements dégoulinant en sont une preuve suffisante.
+mimic-take-window = Ridicule. Vous ne pouvez pas prendre une ouverture. Pas définition c'est un trou, un absence de substance dans un mur. Vous ne pouvez pas prendre ce qui n'existe pas.
+
 name = Quel est ton nom?
 object-bird = oiseau
 object-bread = pain

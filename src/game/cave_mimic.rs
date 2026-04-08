@@ -16,7 +16,7 @@ impl Game {
 
         match verb {
             Verb::Look => self.mimic_look(),
-            /*Verb::Take => self.water_take(),
+            Verb::Take => self.mimic_take(),/*
             Verb::Go => self.water_go(),
             Verb::Talk => self.water_talk(),
             Verb::Eat => self.water_eat(),
@@ -52,25 +52,30 @@ impl Game {
 
         self.display_text(Self::cave_mimic, text_output)
     }
-/*
-    fn water_take(&mut self) -> State<Game> {
+
+    fn mimic_take(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
-            Object::Water => self.text("water-take-water"),
+            Object::Chest => self.text("mimic-take-chest"),
+            Object::Window => self.text("mimic-take-window"),
+            Object::Window2 => self.text("mimic-take-window"),
+            Object::Bird => self.text("mimic-take-bird"),
+            Object::Key => self.text("mimic-take-key"),
+            Object::Water => self.text("mimic-take-water"),
             _ => {
                 if self.raw_object().is_empty() {
                     self.text("cannot-take-nothing")
                 } else {
                     return State::with_input(
-                        Self::cave_entrance,
+                        Self::cave_mimic,
                         self.text_with_object("cannot-take", self.raw_object()),
                     );
                 }
             }
         };
 
-        self.display_text(Self::cave_water, text_output)
+        self.display_text(Self::cave_mimic, text_output)
     }
-
+/*
     fn water_eat(&mut self) -> State<Game> {
         let text_output = if self.raw_object().is_empty() {
             self.text("cannot-eat-nothing")
