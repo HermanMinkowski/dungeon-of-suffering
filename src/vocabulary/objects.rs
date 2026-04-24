@@ -21,6 +21,7 @@ pub struct Objects {
     pub window: String,
     pub window2: String,
     pub bird: String,
+    pub cookie: String,
 
     lookup: HashMap<String, Object>,
 }
@@ -44,6 +45,7 @@ pub enum Object {
     Window,
     Window2,
     Bird,
+    Cookie,
     #[default]
     Unknown,
 }
@@ -68,6 +70,7 @@ impl Objects {
             window: i18n.t("object-window", None),
             window2: i18n.t("object-window2", None),
             bird: i18n.t("object-bird", None),
+            cookie: i18n.t("object-cookie", None),
             lookup: HashMap::new(),
         };
 
@@ -93,6 +96,7 @@ impl Objects {
         self.window = i18n.t("object-window", None);
         self.window2 = i18n.t("object-window2", None);
         self.bird = i18n.t("object-bird", None);
+        self.cookie = i18n.t("object-cookie", None);
 
         self.rebuild_lookup();
     }
@@ -116,6 +120,7 @@ impl Objects {
             (Cli::normalize(&self.window), Object::Window),
             (Cli::normalize(&self.window2), Object::Window2),
             (Cli::normalize(&self.bird), Object::Bird),
+            (Cli::normalize(&self.cookie), Object::Cookie),
         ]);
     }
 

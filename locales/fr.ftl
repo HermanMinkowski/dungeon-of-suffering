@@ -12,6 +12,7 @@ cannot-push = C'est impossible à pousser.
 cannot-take = Impossible de prendre { $object }
 cannot-take-nothing = Vous empochez un énorme poignée de vide.
 cannot-talk = Vous essayez la discussion, mais vous ne récoltez qu'un silence.
+cannot-talk-yourself = Vous vous parlez à vous même et n'en retirez aucuns bénéfices.
 cannot-use = Vous ne trouvez aucun usage à ceci.
 command-equipment = equipment
 command-help = aide
@@ -71,6 +72,7 @@ intro-text = Assis sur un tronc d'arbre, à l'arrière de l'auberge du village, 
 look-nothing = Circuler, il n'y a rien à voir!
 message-end = C'est la fin pour { $name }
 messages-hello = Allô, { $name }
+mimic-eat-cookie = Il s'agit d'un petit biscuit sec et dur, probablement rassis. Il est mieux dans votre poche.
 mimic-look = Vous vous trouvez dans une petite pièce, une ouverture minuscule fait office de fenêtre et laisse filtrer un mince rayon de lumière.
 
     Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.
@@ -82,17 +84,24 @@ mimic-look-water = Vous regarder l'eau qui remplit l'ouverture par laquelle vous
 mimic-look-window = Vous vous approchez de la fenêtre et regardez à l'extérieur. Vous apercevez un paysage verdoyant, avec un arbre majestueux dans lequel est perché un ouseau. Sur le sol, au pied de l'arbre, une clé dorée repose dans l'herbe, scintillant faiblement à la lumière du soleil.
 
     Le soleil brille haut dans le ciel, illuminant la scène d'une lumière chaleureuse et apaisante. C'est un contraste frappant avec l'obscurité de la pièce où vous vous trouvez et cela vous donne un sentiment d'espoir et de liberté, même si vous êtes encore prisonnier de cette maudite caverne.
+mimic-open-chest-dead = Vous ouvrez avec anticipation le couvercle du coffre en bois. Déjà vous rêvez à ce que vous aller faire de tous l'or qu'il pourrait contenir. Vous avez toujours rêvé d'un bâteau, non un navire! Une épée de qualité vous parrait essentielle, ainsi qu'un magifique destrier.
+
+    Malheureusement vos rêvasseries sont de courte durée. Sitôt le couvercle ouvert, vous découvrez non pas une tonne d'or, mais une créature énorme langue prises en sandwich entre deux séries de dents acérées. Ce n'est pas un coffre, c'est un mimique! Une créature qui peut prendre l'apparence d'objects communs pour pièger d'insouciants aventuriers et en faire leur repas (i.e., vous).
+
+    Vous tentez de relâcher le couvercle mais déjà de nombreux pesudopodes vous aggripent et vous tirent vers l'énorme bouche. Une odeur de sucs gastric envahi vos narines et la salive du monstre couvre maintenant votre visage puisque sa langue mauvassée vous en enduit alègrement. La dernière chose que vous voyez sont les dents aussi pointues qu'un poignard qui vous coupent en deux au niveau de la taille. Votre mission est pantiellement accomplis, vous venez de nourrir l’une des créatures du donjon mentionée sur l'avis de la taverne. Vous mourez, digéré par le mimique.
 mimic-take-bird = L'oiseau est bien trop loin pour être attrappé. Peut-être pourriez vous l'attier avec de la nourriture.
 mimic-take-chest = Le coffre est massif. Impossible de le faire entrer dans votre poche ou même de le trainer sur votre dos. Vous vous feriez un tour de rein à essayer de le soulever et le dernier ramancheux que vous avez consulté vous a seulement soulagé d'aucune douleurs, mais de plusieurs pièces d'or.
 mimic-take-key = La clé est trop loin, vous ne pouvez pas l'atteindre.
 mimic-take-water = Non. Vous n'avez aucune envie de vous mouiller à nouveau pour l'instant. Vos sous-vêtements dégoulinant en sont une preuve suffisante.
-mimic-take-window = Ridicule. Vous ne pouvez pas prendre une ouverture. Pas définition c'est un trou, un absence de substance dans un mur. Vous ne pouvez pas prendre ce qui n'existe pas.
+mimic-take-window = Ridicule. Vous ne pouvez pas prendre une ouverture. Par définition, c'est un trou! une absence de substance dans un mur. Vous ne pouvez pas prendre ce qui n'existe pas.
+mimic-talk-bird = Vous entammez une conversation avec l'oiseau perché dans l'arbre: "Cui cui pit pit cui cui" Dites-vous. "Cui?" répond-il surpris. "Cui pit pit pit cui pit!" répliquez-vous. "Cui cui" répète-t-il sans cesse suite à votre intervention. Vous ne savez qu'en penser. Peut-être a-t-il faim... ou froid... ou meurt d'ennui. Qui sais!
 
 name = Quel est ton nom?
 object-bird = oiseau
 object-bread = pain
 object-chest = coffre
 object-coal = charbon
+object-cookie = biscuit
 object-east = est
 object-ginette = Ginette
 object-inn = auberge

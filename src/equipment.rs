@@ -10,7 +10,8 @@ pub enum ItemKind {
     Map,
     Purse,
     Gold,
-    Coal
+    Coal,
+    Cookie
 }
 
 impl ItemKind {
@@ -25,6 +26,7 @@ impl ItemKind {
             ItemKind::Purse => "object-purse",
             ItemKind::Gold => "object-gold",
             ItemKind::Coal => "object-coal",
+            ItemKind::Cookie => "object-cookie",
         }
     }
 }
@@ -84,8 +86,9 @@ impl Equipment {
 
     pub fn init_equipment() -> Equipment {
         let bread = Item::new_default(ItemKind::Bread);
+        let cookie = Item::new_default(ItemKind::Cookie);
 
-        Equipment::new(vec![bread])
+        Equipment::new(vec![bread, cookie])
     }
 
     pub fn list(&self, i18n: &I18n) -> String {
