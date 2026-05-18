@@ -5,6 +5,7 @@ pub struct Status {
     pub talked_to_mage: bool,
     pub signed_discharge: bool,
     pub saw_the_light: bool,
+    pub looked_at_window: bool,
 }
 
 impl Status {
@@ -15,6 +16,7 @@ impl Status {
             talked_to_mage: false,
             signed_discharge: false,
             saw_the_light: false,
+            looked_at_window: false
         }
     }
 }

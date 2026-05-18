@@ -1,4 +1,4 @@
-use crate::equipment::ItemKind;
+use crate::equipment::{Item, ItemKind};
 use crate::state::State;
 use crate::vocabulary::objects::Object;
 use crate::vocabulary::verbs::Verb;
@@ -12,7 +12,7 @@ impl Game {
         let global_command_output = self.handle_global_commands(command);
 
         if global_command_output.is_some() {
-            return self.display_text(Self::cave_water, global_command_output);
+            return self.display_text(Self::cave_mimic, global_command_output);
         }
 
         match verb {
@@ -21,10 +21,10 @@ impl Game {
             Verb::Go => self.mimic_go(),
             Verb::Talk => self.mimic_talk(),
             Verb::Eat => self.mimic_eat(),
-            Verb::Open => self.mimic_open(), /*
-            Verb::Use => self.water_use(),
-            Verb::Push => self.water_push(),
-            Verb::Jump => self.water_jump(),*/
+            Verb::Open => self.mimic_open(),
+            Verb::Use => self.mimic_use(),
+            Verb::Push => self.mimic_push(),
+            Verb::Jump => self.mimic_jump(),
             _ => self.default_answer(Self::cave_mimic),
         }
     }
@@ -43,8 +43,14 @@ impl Game {
         let text_output = match self.parsed_input.object {
             Object::Water => self.text("mimic-look-water"),
             Object::Chest => self.text("mimic-look-chest"),
-            Object::Window => self.text("mimic-look-window"),
-            Object::Window2 => self.text("mimic-look-window"),
+            Object::Window => {
+                self.status.looked_at_window = true;
+                self.text("mimic-look-window")
+            }
+            Object::Window2 => {
+                self.status.looked_at_window = true;
+                self.text("mimic-look-window")
+            }
             Object::Bird => self.text("mimic-look-bird"),
             _ => self.text("look-nothing"),
         };
@@ -57,7 +63,13 @@ impl Game {
             Object::Chest => self.text("mimic-take-chest"),
             Object::Window => self.text("mimic-take-window"),
             Object::Window2 => self.text("mimic-take-window"),
-            Object::Bird => self.text("mimic-take-bird"),
+            Object::Bird => {
+                if self.status.looked_at_window {
+                    self.text("mimic-take-bird")
+                } else {
+                    self.text("mimic-no-bird")
+                }
+            }
             Object::Key => self.text("mimic-take-key"),
             Object::Water => self.text("mimic-take-water"),
             _ => {
@@ -87,7 +99,13 @@ impl Game {
 
     fn mimic_talk(&mut self) -> State<Game> {
         let text_output = match self.parsed_input.object {
-            Object::Bird => self.text("mimic-talk-bird"),
+            Object::Bird => {
+                if self.status.looked_at_window {
+                    self.text("mimic-talk-bird")
+                } else {
+                    self.text("mimic-no-bird")
+                }
+            }
             _ => {
                 if self.raw_object().is_empty() {
                     self.text("cannot-talk-yourself")
@@ -142,23 +160,40 @@ impl Game {
         self.display_text(Self::cave_mimic, text_output)
     }
 
-    //TODO IMPLEMENT check if looked through window. if yes use cookie. Should have check through window before tanking to bird also.
+    fn mimic_use(&mut self) -> State<Game> {
+        let text_output = match self.parsed_input.object {
+            Object::Cookie => {
+                if !self.player.equipments.has(ItemKind::Cookie) {
+                    self.text("mimic-use-no-cookie")
+                } else if self.player.equipments.has(ItemKind::Cookie)
+                    && self.status.looked_at_window
+                {
+                    self.player.equipments.add(Item::new_default(ItemKind::Key));
+                    self.text("mimic-use-cookie")
+                } else {
+                    self.text("mimic-use-no-window-cookie")
+                }
+            }
+            _ => self.text("cannot-use"),
+        };
 
-    fn water2_use(&mut self) -> State<Game> {
-        let text_output = self.text("cannot-use");
-        self.display_text(Self::cave_water, text_output)
+        self.display_text(Self::cave_mimic, text_output)
     }
 
-    fn water2_push(&mut self) -> State<Game> {
-        let text_output = self.text("cannot-push");
-        self.display_text(Self::cave_water, text_output)
-    }
-
-    fn water2_jump(&mut self) -> State<Game> {
-        if self.parsed_input.object == Object::Water {
-            return self.display_text(Self::cave_entrance, self.text("water-jump-water"));
+    fn mimic_push(&mut self) -> State<Game> {
+        if self.parsed_input.object == Object::Chest {
+            return self.display_text(Self::intro, self.text("mimic-push-chest-dead"));
         }
 
-        self.display_text(Self::cave_water, self.text("cannot-jump"))
+        let text_output = self.text("cannot-push");
+        self.display_text(Self::cave_mimic, text_output)
+    }
+
+    fn mimic_jump(&mut self) -> State<Game> {
+        if self.parsed_input.object == Object::Water {
+            return self.display_text(Self::cave_water, self.text("mimic-jump-water"));
+        }
+
+        self.display_text(Self::cave_mimic, self.text("cannot-jump"))
     }
 }

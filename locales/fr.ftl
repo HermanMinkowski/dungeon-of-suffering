@@ -73,6 +73,12 @@ look-nothing = Circuler, il n'y a rien à voir!
 message-end = C'est la fin pour { $name }
 messages-hello = Allô, { $name }
 mimic-eat-cookie = Il s'agit d'un petit biscuit sec et dur, probablement rassis. Il est mieux dans votre poche.
+
+
+mimic-jump-water = Vous plongez dans l'eau. Vous laissant guider par la lueur du lichen bioluminescent dans la grotte vous nagez vurieusement dans le tunel sous-marin.
+
+   Après de durs efforts, vous émergez trempé de l'eau stagnante du petit lac. Aucune chance de sécher avec cette humidité et de chaleur.
+
 mimic-look = Vous vous trouvez dans une petite pièce, une ouverture minuscule fait office de fenêtre et laisse filtrer un mince rayon de lumière.
 
     Au centre de la pièce repose un énorme coffre en bois, renforcé de lourdes bandes de métal. Il ne semble toutefois doté ni de serrure ni de cadenas.
@@ -89,12 +95,29 @@ mimic-open-chest-dead = Vous ouvrez avec anticipation le couvercle du coffre en 
     Malheureusement vos rêvasseries sont de courte durée. Sitôt le couvercle ouvert, vous découvrez non pas une tonne d'or, mais une créature énorme langue prises en sandwich entre deux séries de dents acérées. Ce n'est pas un coffre, c'est un mimique! Une créature qui peut prendre l'apparence d'objects communs pour pièger d'insouciants aventuriers et en faire leur repas (i.e., vous).
 
     Vous tentez de relâcher le couvercle mais déjà de nombreux pesudopodes vous aggripent et vous tirent vers l'énorme bouche. Une odeur de sucs gastric envahi vos narines et la salive du monstre couvre maintenant votre visage puisque sa langue mauvassée vous en enduit alègrement. La dernière chose que vous voyez sont les dents aussi pointues qu'un poignard qui vous coupent en deux au niveau de la taille. Votre mission est pantiellement accomplis, vous venez de nourrir l’une des créatures du donjon mentionée sur l'avis de la taverne. Vous mourez, digéré par le mimique.
+mimic-no-bird = Un oiseau? Quel oiseau?
+
+mimic-push-chest-dead = Vous vous penchez pour posser le coffre. Vous appuyez fermement vos mais sur et coffre et commencer à forcer. Sitôt votre tête inclinés pour mieux foccusser vos effort, elle est engloutie par une énorme machoire décorés de dents acérées. Vous l'avez qu'une fraction de seconde pour être dégouté par la langue gluante qui lèche votre visage avant que la monstrueuse bouche ne se referme et sépare votre tête de votre corps. Ce n'était pas un coffre mais un mimique! Une créature qui peut prendre l'apparence d'objects communs pour pièger d'insouciants aventuriers et en faire leur repas (i.e., vous).
+
+    Votre mission est pantiellement accomplis, vous venez de nourrir l’une des créatures du donjon mentionée sur l'avis de la taverne. Le reste de votre corps ne tarde pas à venir rejoindre votre tête à l'intérieur du mimic où vous serez digéré lentement.
+
 mimic-take-bird = L'oiseau est bien trop loin pour être attrappé. Peut-être pourriez vous l'attier avec de la nourriture.
 mimic-take-chest = Le coffre est massif. Impossible de le faire entrer dans votre poche ou même de le trainer sur votre dos. Vous vous feriez un tour de rein à essayer de le soulever et le dernier ramancheux que vous avez consulté vous a seulement soulagé d'aucune douleurs, mais de plusieurs pièces d'or.
 mimic-take-key = La clé est trop loin, vous ne pouvez pas l'atteindre.
 mimic-take-water = Non. Vous n'avez aucune envie de vous mouiller à nouveau pour l'instant. Vos sous-vêtements dégoulinant en sont une preuve suffisante.
 mimic-take-window = Ridicule. Vous ne pouvez pas prendre une ouverture. Par définition, c'est un trou! une absence de substance dans un mur. Vous ne pouvez pas prendre ce qui n'existe pas.
 mimic-talk-bird = Vous entammez une conversation avec l'oiseau perché dans l'arbre: "Cui cui pit pit cui cui" Dites-vous. "Cui?" répond-il surpris. "Cui pit pit pit cui pit!" répliquez-vous. "Cui cui" répète-t-il sans cesse suite à votre intervention. Vous ne savez qu'en penser. Peut-être a-t-il faim... ou froid... ou meurt d'ennui. Qui sais!
+
+mimic-use-cookie = Vous vous approchez de la fenêtre et regarder l'oiseau qui pépite joyeusement.
+
+    Vous cassez le biscuit en deux et jetez une moitié sur le sol près de la clé dorée qui y repose. L'oiseau se précipite sur cette collation inattendue. Par reflexe, il aggrippe la clé avec ses pattes, comme s'il s'agissait d'un branche.
+
+    Vous en profitez pour attirer l'oiseau à la fenêtre avec le second morceau de biscuit. Ça fonctionne! Aussitôt que l'animal incline la tête pour s'emparer de biscuit, vous arrachez la clé de ses pattes ce qui projette brusquement le volatil sur le sol. L'oiseau, visiblement choqué par votre action, s'envole en poussant des cris stridents non sans avoir avalé le biscuit.
+
+    Vous fixez la clé dans votre main et vous vous demandez si vous avez fait le bon choix. Vous avez réussi à obtenir la clé, mais ne savez pas ce qu'elle ouvre. De plus, vous êtes affamé, ce oiseau aurait fait un délicieux repas. Votre estoman lance un cri de protestation alors que vous empochez la clé.
+mimic-use-no-cookie = Quel biscuit?
+mimic-use-no-window-cookie = Utiliser le biscuit? Comment? Où? Pouquoi?
+
 
 name = Quel est ton nom?
 object-bird = oiseau
